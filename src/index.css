@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: 247 245 240;
+  --surface: 255 255 255;
+  --sunken: 240 237 230;
+  --ink: 28 27 25;
+  --muted: 104 100 92;
+  --line: 224 220 210;
+  --accent: 31 95 91;
+  --accent-ink: 255 255 255;
+  --accent-soft: 227 239 236;
+  --good: 38 104 62;
+  --good-soft: 228 242 232;
+  --bad: 162 59 42;
+  --bad-soft: 249 232 228;
+  --note: 138 86 20;
+  --note-soft: 249 240 222;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: 21 21 19;
+    --surface: 31 31 28;
+    --sunken: 40 40 36;
+    --ink: 240 238 232;
+    --muted: 163 159 150;
+    --line: 62 61 56;
+    --accent: 106 187 178;
+    --accent-ink: 12 30 28;
+    --accent-soft: 31 52 49;
+    --good: 128 200 150;
+    --good-soft: 28 48 36;
+    --bad: 238 140 124;
+    --bad-soft: 62 33 28;
+    --note: 224 178 106;
+    --note-soft: 56 45 26;
+    color-scheme: dark;
+  }
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .card { @apply bg-surface border border-line rounded-2xl shadow-card; }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-5 rounded-xl font-semibold text-[15px]
+           transition-colors select-none;
+  }
+  .btn-primary { @apply btn bg-accent text-accent-ink hover:opacity-90 active:opacity-80 disabled:opacity-40; }
+  .btn-secondary { @apply btn bg-surface text-ink border border-line hover:bg-sunken disabled:opacity-40; }
+  .btn-ghost { @apply btn text-muted hover:bg-sunken hover:text-ink; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-muted; }
+  .hanzi { @apply font-hanzi; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.25s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
