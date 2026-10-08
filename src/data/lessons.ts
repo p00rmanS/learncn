@@ -1,6 +1,7 @@
 import type { Block, Lesson, Word } from './types';
 import { W } from './words';
 import { EXTRA, MORE_LESSONS } from './lessonsMore';
+import { PART3_LESSONS } from './lessonsPart3';
 
 export const MODULES = [
   {
@@ -19,9 +20,19 @@ export const MODULES = [
     blurb: 'See characters as parts you can understand, not random drawings.',
   },
   {
+    id: 'patterns' as const,
+    title: 'Core Patterns',
+    blurb: 'The sentence patterns that unlock most everyday Mandarin.',
+  },
+  {
     id: 'daily' as const,
     title: 'Everyday Life',
     blurb: 'Family, food, shopping, time and the question words you need every day.',
+  },
+  {
+    id: 'work' as const,
+    title: 'Work and Service',
+    blurb: 'Talk about jobs and welcome guests the way service staff do.',
   },
 ];
 
@@ -972,7 +983,7 @@ const BASE_LESSONS: Lesson[] = [
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS]
+export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;

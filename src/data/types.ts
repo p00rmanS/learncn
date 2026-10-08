@@ -49,7 +49,7 @@ export interface Page {
 
 export interface Lesson {
   id: string;
-  module: 'sound' | 'convo' | 'hanzi' | 'daily';
+  module: 'sound' | 'convo' | 'hanzi' | 'patterns' | 'daily' | 'work';
   title: string;
   subtitle: string;
   minutes: number;

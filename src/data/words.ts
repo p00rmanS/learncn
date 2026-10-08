@@ -1,5 +1,6 @@
 import type { Word } from './types';
 import { W2 } from './wordsMore';
+import { W3 } from './wordsExtra';
 
 const w = (x: Word): Word => x;
 
@@ -72,5 +73,5 @@ export const W = {
   cha: w({ id: 'cha', hanzi: '茶', pinyin: 'chá', english: 'tea', tones: [2] }),
 } satisfies Record<string, Word>;
 
-export const ALL_WORDS: Word[] = [...Object.values(W), ...Object.values(W2)];
+export const ALL_WORDS: Word[] = [...Object.values(W), ...Object.values(W2), ...Object.values(W3)];
 export const WORD_BY_ID: Record<string, Word> = Object.fromEntries(ALL_WORDS.map((x) => [x.id, x]));
