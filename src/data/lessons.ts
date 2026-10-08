@@ -2,6 +2,7 @@ import type { Block, Lesson, Word } from './types';
 import { W } from './words';
 import { EXTRA, MORE_LESSONS } from './lessonsMore';
 import { PART3_LESSONS } from './lessonsPart3';
+import { PART4_LESSONS } from './lessonsPart4';
 
 export const MODULES = [
   {
@@ -983,7 +984,7 @@ const BASE_LESSONS: Lesson[] = [
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS]
+export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
