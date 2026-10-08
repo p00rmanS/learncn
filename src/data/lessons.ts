@@ -3,6 +3,7 @@ import { W } from './words';
 import { EXTRA, MORE_LESSONS } from './lessonsMore';
 import { PART3_LESSONS } from './lessonsPart3';
 import { PART4_LESSONS } from './lessonsPart4';
+import { PART5_LESSONS } from './lessonsPart5';
 
 export const MODULES = [
   {
@@ -29,6 +30,16 @@ export const MODULES = [
     id: 'daily' as const,
     title: 'Everyday Life',
     blurb: 'Family, food, shopping, time and the question words you need every day.',
+  },
+  {
+    id: 'talk' as const,
+    title: 'Natural Conversation',
+    blurb: 'Fillers, reactions and everyday phrases that make you sound like you belong in the conversation.',
+  },
+  {
+    id: 'food' as const,
+    title: 'Restaurant Toolkit',
+    blurb: 'Order, handle allergies and spice, pay, fix problems, and take orders as staff.',
   },
   {
     id: 'work' as const,
@@ -984,7 +995,7 @@ const BASE_LESSONS: Lesson[] = [
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS]
+export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
