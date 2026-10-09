@@ -4,6 +4,7 @@ import { EXTRA, MORE_LESSONS } from './lessonsMore';
 import { PART3_LESSONS } from './lessonsPart3';
 import { PART4_LESSONS } from './lessonsPart4';
 import { PART5_LESSONS } from './lessonsPart5';
+import { PART6_LESSONS } from './lessonsPart6';
 
 export const MODULES = [
   {
@@ -995,7 +996,7 @@ const BASE_LESSONS: Lesson[] = [
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS]
+export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
