@@ -33,8 +33,8 @@ export default function AudioButton({
   const dims = size === 'lg' ? 'h-14 w-14' : size === 'sm' ? 'h-9 w-9' : 'h-11 w-11';
   const tone =
     variant === 'solid'
-      ? 'bg-accent text-accent-ink hover:opacity-90'
-      : 'bg-accent-soft text-accent hover:opacity-80';
+      ? 'bg-ink text-paper hover:opacity-85'
+      : 'border border-ink/20 text-ink hover:bg-ink hover:text-paper hover:border-ink';
 
   return (
     <span className="inline-flex items-center gap-2">
@@ -45,7 +45,7 @@ export default function AudioButton({
           void play('normal');
         }}
         aria-label={label ?? `Play ${text}`}
-        className={`${dims} ${tone} rounded-full inline-flex items-center justify-center transition-colors ${busy === 'normal' ? 'ring-2 ring-accent' : ''}`}
+        className={`${dims} ${tone} rounded-full inline-flex items-center justify-center transition-colors ${busy === 'normal' ? 'ring-2 ring-accent ring-offset-2 ring-offset-paper' : ''}`}
       >
         <Icon name="volume" size={size === 'lg' ? 26 : size === 'sm' ? 16 : 20} />
       </button>
@@ -58,7 +58,7 @@ export default function AudioButton({
           }}
           aria-label={`Play ${text} slowly`}
           title="Slow"
-          className={`${dims} bg-sunken text-muted hover:text-ink rounded-full inline-flex items-center justify-center transition-colors ${busy === 'slow' ? 'ring-2 ring-accent' : ''}`}
+          className={`${dims} border border-line text-muted hover:text-ink hover:border-ink/40 rounded-full inline-flex items-center justify-center transition-colors ${busy === 'slow' ? 'ring-2 ring-accent ring-offset-2 ring-offset-paper' : ''}`}
         >
           <Icon name="slow" size={size === 'lg' ? 24 : size === 'sm' ? 16 : 19} />
         </button>

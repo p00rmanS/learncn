@@ -1,43 +1,60 @@
+@import './fonts.css';
+
+/* Fraunces for plain Latin text only. Any glyph with a tone mark (ā, ǎ, ǜ…) falls back to Inter,
+   which draws the marks correctly. */
+@font-face {
+  font-family: 'Fraunces Display';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2) format('woff2-variations');
+  unicode-range: U+0020-007E, U+2013-2014, U+2018-201D, U+2026;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ───────── Design tokens: "ink and paper", one vermilion seal accent ───────── */
 :root {
-  --paper: 247 245 240;
-  --surface: 255 255 255;
-  --sunken: 240 237 230;
-  --ink: 28 27 25;
-  --muted: 104 100 92;
-  --line: 224 220 210;
-  --accent: 31 95 91;
-  --accent-ink: 255 255 255;
-  --accent-soft: 227 239 236;
-  --good: 38 104 62;
-  --good-soft: 228 242 232;
-  --bad: 162 59 42;
-  --bad-soft: 249 232 228;
-  --note: 138 86 20;
-  --note-soft: 249 240 222;
+  --paper: 245 240 230;
+  --surface: 251 248 241;
+  --sunken: 235 229 216;
+  --ink: 27 25 22;
+  --muted: 108 101 91;
+  --line: 215 207 191;
+  --accent: 188 52 34;
+  --accent-ink: 255 250 242;
+  --accent-soft: 245 227 219;
+  --good: 46 98 76;
+  --good-soft: 225 237 228;
+  --bad: 140 48 38;
+  --bad-soft: 243 225 219;
+  --note: 126 88 26;
+  --note-soft: 243 233 210;
+  --grain-blend: multiply;
+  --grain-opacity: 0.5;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: 21 21 19;
-    --surface: 31 31 28;
-    --sunken: 40 40 36;
-    --ink: 240 238 232;
-    --muted: 163 159 150;
-    --line: 62 61 56;
-    --accent: 106 187 178;
-    --accent-ink: 12 30 28;
-    --accent-soft: 31 52 49;
-    --good: 128 200 150;
-    --good-soft: 28 48 36;
-    --bad: 238 140 124;
-    --bad-soft: 62 33 28;
+    --paper: 20 19 16;
+    --surface: 28 27 23;
+    --sunken: 38 36 31;
+    --ink: 241 235 222;
+    --muted: 161 154 141;
+    --line: 58 55 48;
+    --accent: 226 89 64;
+    --accent-ink: 30 12 8;
+    --accent-soft: 54 31 26;
+    --good: 126 192 152;
+    --good-soft: 28 46 36;
+    --bad: 234 130 114;
+    --bad-soft: 60 32 28;
     --note: 224 178 106;
-    --note-soft: 56 45 26;
+    --note-soft: 54 44 27;
+    --grain-blend: screen;
+    --grain-opacity: 0.22;
     color-scheme: dark;
   }
 }
@@ -48,9 +65,30 @@ body {
   margin: 0;
   background: rgb(var(--paper));
   color: rgb(var(--ink));
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  font-feature-settings: 'cv11', 'ss03';
   -webkit-font-smoothing: antialiased;
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+/* Paper grain: a faint, static texture so flat colour never feels digital */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .4  0 0 0 0 .32  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces Display', 'Inter Variable', 'Noto Serif SC', Georgia, serif;
+  font-variation-settings: 'opsz' 96;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  font-weight: 600;
 }
 
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -58,30 +96,49 @@ button:disabled { cursor: not-allowed; }
 
 :focus-visible {
   outline: 2px solid rgb(var(--accent));
-  outline-offset: 2px;
-  border-radius: 6px;
+  outline-offset: 3px;
+  border-radius: 8px;
 }
+
+::selection { background: rgb(var(--accent) / 0.25); }
 
 @layer components {
-  .card { @apply bg-surface border border-line rounded-2xl shadow-card; }
+  .card { @apply bg-surface border border-line rounded-[14px]; }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-5 rounded-xl font-semibold text-[15px]
-           transition-colors select-none;
+    @apply inline-flex items-center justify-center gap-2 min-h-[48px] px-6 rounded-full font-medium text-[15px]
+           tracking-[0.01em] transition-[background-color,color,transform,opacity] duration-200 select-none;
   }
-  .btn-primary { @apply btn bg-accent text-accent-ink hover:opacity-90 active:opacity-80 disabled:opacity-40; }
-  .btn-secondary { @apply btn bg-surface text-ink border border-line hover:bg-sunken disabled:opacity-40; }
-  .btn-ghost { @apply btn text-muted hover:bg-sunken hover:text-ink; }
-  .eyebrow { @apply text-xs font-semibold uppercase tracking-wider text-muted; }
-  .hanzi { @apply font-hanzi; }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { @apply btn bg-ink text-paper hover:opacity-85 disabled:opacity-35; }
+  .btn-seal { @apply btn bg-accent text-accent-ink hover:opacity-90 disabled:opacity-35; }
+  .btn-secondary { @apply btn border border-ink/25 text-ink hover:bg-ink hover:text-paper hover:border-ink disabled:opacity-35; }
+  .btn-ghost { @apply btn text-muted hover:text-ink; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-muted; }
+  .hanzi { @apply font-hanzi font-medium; }
+  .numeral { font-family: 'Fraunces Display', 'Inter Variable', Georgia, serif; font-variation-settings: 'opsz' 144; font-variant-numeric: lining-nums; }
 }
 
+/* ───────── Motion ───────── */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
-.rise { animation: rise 0.25s ease-out both; }
+.rise { animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 0.9s cubic-bezier(0.5, 0, 0.2, 1) 0.15s forwards; }
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.6) rotate(-14deg); }
+  to { opacity: 1; transform: scale(1) rotate(-4deg); }
+}
+.stamp-in { animation: pop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; }
+  .rise, .stamp-in { animation: none; }
+  .draw { animation: none; stroke-dashoffset: 0; }
   * { transition-duration: 0.01ms !important; }
 }

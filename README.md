@@ -25,3 +25,13 @@ Lessons are data. Add words to `src/data/words.ts`, then add a lesson object to 
 Uses the browser's Mandarin text-to-speech voice. If a device has none, the app shows how to install one. Swap `src/lib/audio.ts` for recorded audio later.
 
 `legacy/` holds the previous prototype for reference. It is not built.
+
+## Design
+
+Ink-and-paper look with a single vermilion "seal" accent. Fraunces (headings), Inter (UI) and Noto Serif SC (hanzi) are bundled, with no CDN. Chinese font slices are subset to the characters the app uses:
+
+```bash
+node scripts/subset-fonts.mjs   # re-run after adding lessons with new characters
+```
+
+Unlisted characters fall back to a system serif font.

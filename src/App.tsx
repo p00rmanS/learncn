@@ -1,6 +1,7 @@
 import { useRoute } from './lib/router';
 import { StoreProvider } from './lib/store';
 import Shell from './components/Shell';
+import { SvgDefs } from './components/Seal';
 import Home from './views/Home';
 import Learn from './views/Learn';
 import LessonPlayer from './views/LessonPlayer';
@@ -30,6 +31,7 @@ function Routes() {
 export default function App() {
   return (
     <StoreProvider>
+      <SvgDefs />
       <Routes />
     </StoreProvider>
   );

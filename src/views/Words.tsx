@@ -31,7 +31,7 @@ export default function Words() {
     <div className="space-y-6">
       <header>
         <p className="eyebrow">Dictionary</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Words</h1>
+        <h1 className="mt-4 text-[44px] leading-[1.02] sm:text-[60px]">Words</h1>
         <p className="mt-2 text-muted">Every word in the course, with audio. Search by hanzi, pinyin (tone marks optional) or English.</p>
       </header>
 
@@ -66,7 +66,7 @@ export default function Words() {
           {filter === 'learned' && !q ? 'Finish a lesson and its words will appear here.' : 'No words match that search.'}
         </p>
       ) : (
-        <ul className="grid gap-2.5">
+        <ul className="divide-y divide-line border-y border-line">
           {results.map((w) => (
             <li key={w.id}>
               <WordCard word={w} compact />

@@ -22,11 +22,9 @@ export default {
         'note-soft': c('note-soft'),
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', 'sans-serif'],
-        hanzi: ['Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'sans-serif'],
-      },
-      boxShadow: {
-        card: '0 1px 2px rgb(0 0 0 / 0.04), 0 1px 1px rgb(0 0 0 / 0.03)',
+        sans: ['"Inter Variable"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Microsoft YaHei"', '"PingFang SC"', 'sans-serif'],
+        display: ['"Fraunces Display"', '"Inter Variable"', '"Noto Serif SC"', 'Georgia', 'serif'],
+        hanzi: ['"Noto Serif SC"', '"Source Han Serif SC"', '"Songti SC"', 'STSong', '"Noto Serif CJK SC"', 'SimSun', 'serif'],
       },
     },
   },

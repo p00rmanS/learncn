@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import '@fontsource-variable/inter';
 import './index.css';
 
 // Offline support only in production builds. In dev, a service worker serves stale

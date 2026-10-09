@@ -305,11 +305,11 @@ export default function SoundLab() {
     <div className="space-y-6">
       <header>
         <p className="eyebrow">Practice</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Sound Lab</h1>
+        <h1 className="mt-4 text-[44px] leading-[1.02] sm:text-[60px]">Sound Lab</h1>
         <p className="mt-2 text-muted">Short drills for your ears and mouth. Five minutes a day beats an hour once a week.</p>
       </header>
 
-      <div className="flex gap-1 overflow-x-auto rounded-xl bg-sunken p-1" role="tablist" aria-label="Sound Lab sections">
+      <div className="flex gap-7 overflow-x-auto border-b border-line" role="tablist" aria-label="Sound Lab sections">
         {TABS.map((t) => (
           <button
             key={t.id}
@@ -317,7 +317,7 @@ export default function SoundLab() {
             role="tab"
             aria-selected={tab === t.id}
             onClick={() => setTab(t.id)}
-            className={`min-h-[44px] flex-1 whitespace-nowrap rounded-lg px-4 text-sm font-semibold transition-colors ${tab === t.id ? 'bg-surface text-ink shadow-card' : 'text-muted hover:text-ink'}`}
+            className={`-mb-px min-h-[48px] whitespace-nowrap border-b-2 text-[15px] font-medium transition-colors ${tab === t.id ? 'border-accent text-ink' : 'border-transparent text-muted hover:text-ink'}`}
           >
             {t.label}
           </button>

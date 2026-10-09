@@ -43,7 +43,7 @@ export default function Settings() {
     <div className="space-y-6">
       <header>
         <p className="eyebrow">Preferences</p>
-        <h1 className="mt-1 text-3xl font-semibold tracking-tight">Settings</h1>
+        <h1 className="mt-4 text-[44px] leading-[1.02] sm:text-[60px]">Settings</h1>
       </header>
 
       <div className="card divide-y divide-line px-5 sm:px-6">

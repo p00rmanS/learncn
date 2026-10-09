@@ -87,10 +87,10 @@ export default function Review() {
       <div className="space-y-8">
         <header>
           <p className="eyebrow">Spaced repetition</p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight">Review</h1>
+          <h1 className="mt-4 text-[44px] leading-[1.02] sm:text-[60px]">Review</h1>
         </header>
         <div className="card p-6 sm:p-8">
-          <div className="text-5xl font-semibold tabular-nums">{dueIds.length}</div>
+          <div className="numeral text-[84px] font-light leading-none tabular-nums">{dueIds.length}</div>
           <p className="mt-1 text-muted">{dueIds.length === 1 ? 'word is' : 'words are'} due now, out of {deckSize} learned.</p>
           {dueIds.length > 0 ? (
             <button type="button" onClick={() => start(false)} className="btn-primary mt-6">
@@ -151,13 +151,13 @@ export default function Review() {
           {mode === 'listen' && !revealed ? (
             <AudioButton text={word.say ?? word.hanzi} size="lg" variant="solid" slow label="Play the word" />
           ) : (
-            <div className="hanzi text-6xl sm:text-7xl font-semibold">{word.hanzi}</div>
+            <div className="hanzi text-[104px] font-bold leading-none sm:text-[128px]">{word.hanzi}</div>
           )}
         </div>
 
         {revealed ? (
           <div className="mt-6 space-y-1 rise">
-            <div className="text-2xl font-medium">{word.spoken ?? word.pinyin}</div>
+            <div className="font-display text-[32px] font-medium">{word.spoken ?? word.pinyin}</div>
             <div className="text-lg text-muted">{word.english}</div>
             {word.tones && (
               <div className="flex justify-center gap-1 pt-1">
