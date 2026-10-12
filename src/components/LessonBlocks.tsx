@@ -31,7 +31,27 @@ function Callout({ seal, label, tone, children }: { seal: string; label: string;
 
 /* ───────────── Quiz ───────────── */
 
+/** Deterministic shuffle so answers are not always first, but a quiz looks the same every visit. */
+function shuffledOrder(question: string, count: number, keep: boolean): number[] {
+  const order = Array.from({ length: count }, (_, i) => i);
+  if (keep) return order;
+  let seed = 0;
+  for (const ch of question) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
+  const rand = () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
+  for (let i = count - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
 function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; onSolved: () => void }) {
+  // Keep natural order for number-only options (e.g. 13 / 23 / 32); shuffle everything else.
+  const keepOrder = block.options.every((o) => /^[\d\s:.,A-Za-z]{1,12}$/.test(o) && /\d/.test(o));
+  const order = shuffledOrder(block.question, block.options.length, keepOrder);
   const [wrong, setWrong] = useState<number[]>([]);
   const [solved, setSolved] = useState(false);
 
@@ -55,7 +75,8 @@ function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; on
         </div>
       )}
       <div className="grid gap-3" role="group" aria-label="Answer choices">
-        {block.options.map((opt, i) => {
+        {order.map((i, pos) => {
+          const opt = block.options[i];
           const isWrong = wrong.includes(i);
           const isRight = solved && i === block.answer;
           return (
@@ -78,7 +99,7 @@ function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; on
                   isRight ? 'border-good bg-good text-paper' : isWrong ? 'border-bad text-bad' : 'border-line text-muted'
                 }`}
               >
-                {isRight ? <Icon name="check" size={16} /> : isWrong ? <Icon name="x" size={14} /> : String.fromCharCode(65 + i)}
+                {isRight ? <Icon name="check" size={16} /> : isWrong ? <Icon name="x" size={14} /> : String.fromCharCode(65 + pos)}
               </span>
               <span className="hanzi !font-normal">{opt}</span>
             </button>
