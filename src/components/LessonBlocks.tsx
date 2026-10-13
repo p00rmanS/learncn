@@ -4,6 +4,7 @@ import { TONE_INFO } from '../data/tones';
 import AudioButton, { NO_VOICE_EVENT } from './AudioButton';
 import Icon from './Icon';
 import Seal from './Seal';
+import PronounceGuide from './PronounceGuide';
 import ToneGraph from './ToneGraph';
 import WordCard from './WordCard';
 import { speak, startRecording, stopSpeaking } from '../lib/audio';
@@ -11,7 +12,7 @@ import { useStore } from '../lib/store';
 
 /* ───────────── Callout (pro tip, remember, note) ───────────── */
 
-function Callout({ seal, label, tone, children }: { seal: string; label: string; tone: 'ink' | 'sunken' | 'note'; children: ReactNode }) {
+export function Callout({ seal, label, tone, children }: { seal: string; label: string; tone: 'ink' | 'sunken' | 'note'; children: ReactNode }) {
   const skin =
     tone === 'ink'
       ? 'border-l-[3px] border-ink bg-surface pl-5 pr-4'
@@ -48,7 +49,7 @@ function shuffledOrder(question: string, count: number, keep: boolean): number[]
   return order;
 }
 
-function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; onSolved: () => void }) {
+export function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; onSolved: () => void }) {
   // Keep natural order for number-only options (e.g. 13 / 23 / 32); shuffle everything else.
   const keepOrder = block.options.every((o) => /^[\d\s:.,A-Za-z]{1,12}$/.test(o) && /\d/.test(o));
   const order = shuffledOrder(block.question, block.options.length, keepOrder);
@@ -153,6 +154,7 @@ export function Speak({ block }: { block: Extract<Block, { type: 'speak' }> }) {
           <div className="hanzi text-[40px] leading-tight sm:text-[48px]">{block.hanzi}</div>
           <div className="mt-1 font-display text-xl">{block.pinyin}</div>
           <div className="text-muted">{block.english}</div>
+          <PronounceGuide pinyin={block.pinyin} />
         </div>
         <AudioButton text={block.hanzi} label={`Hear ${block.hanzi}`} slow size="lg" variant="solid" />
       </div>
@@ -248,6 +250,7 @@ function Dialogue({ block }: { block: Extract<Block, { type: 'dialogue' }> }) {
             <div className="min-w-0 flex-1">
               <div className="hanzi text-[22px] leading-snug">{l.hanzi}</div>
               {showPinyin && <div className="text-[15px] text-muted">{l.pinyin}</div>}
+              {showPinyin && <PronounceGuide pinyin={l.pinyin} detail={false} />}
               {showEnglish && <div className="text-[14px] italic text-muted">{l.english}</div>}
             </div>
             <AudioButton text={l.hanzi} label={`Play line ${i + 1}`} size="sm" />
@@ -366,6 +369,12 @@ export default function LessonBlocks({ blocks, onQuizSolved }: { blocks: Block[]
           case 'pro':
             return (
               <Callout key={i} seal="妙" label="Pro tip" tone="ink">
+                {b.body}
+              </Callout>
+            );
+          case 'play':
+            return (
+              <Callout key={i} seal="玩" label={b.title} tone="note">
                 {b.body}
               </Callout>
             );

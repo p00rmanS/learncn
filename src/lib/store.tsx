@@ -7,12 +7,17 @@ export interface Settings {
   pinyin: 'always' | 'tap';
   rate: number; // speech rate
   name: string;
+  track: 'adult' | 'kids';
+  showPronounce: boolean;
+  onboarded: boolean;
 }
 
 export interface Progress {
   completed: Record<string, number>; // lessonId -> completion time
   deck: Record<string, CardState>; // wordId -> card
   days: Record<string, number>; // yyyy-mm-dd -> activities done
+  resume: Record<string, number>; // lessonId -> last page index
+  stories: Record<string, number>; // storyId -> completion time
   settings: Settings;
 }
 
@@ -20,7 +25,9 @@ const DEFAULTS: Progress = {
   completed: {},
   deck: {},
   days: {},
-  settings: { taglish: true, pinyin: 'always', rate: 0.85, name: '' },
+  resume: {},
+  stories: {},
+  settings: { taglish: true, pinyin: 'always', rate: 0.85, name: '', track: 'adult', showPronounce: true, onboarded: false },
 };
 
 const KEY = 'sheng.progress.v2';
@@ -34,6 +41,8 @@ function load(): Progress {
       completed: p.completed ?? {},
       deck: p.deck ?? {},
       days: p.days ?? {},
+      resume: p.resume ?? {},
+      stories: p.stories ?? {},
       settings: { ...DEFAULTS.settings, ...(p.settings ?? {}) },
     };
   } catch {
@@ -47,6 +56,8 @@ export const dayKey = (d = new Date()) =>
 interface Store {
   progress: Progress;
   completeLesson: (id: string) => void;
+  setResume: (id: string, page: number) => void;
+  completeStory: (id: string) => void;
   review: (wordId: string, rating: Rating) => void;
   setSettings: (s: Partial<Settings>) => void;
   reset: () => void;
@@ -85,6 +96,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const setResume = useCallback((id: string, page: number) => {
+    setProgress((p) => (p.resume[id] === page ? p : { ...p, resume: { ...p.resume, [id]: page } }));
+  }, []);
+
+  const completeStory = useCallback((id: string) => {
+    setProgress((p) => ({ ...p, stories: { ...p.stories, [id]: p.stories[id] ?? Date.now() }, days: bumpDay(p.days) }));
+  }, []);
+
   const review = useCallback((wordId: string, rating: Rating) => {
     setProgress((p) => {
       const card = p.deck[wordId] ?? newCard();
@@ -104,11 +123,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
 
   const nextLessonId = useMemo(
-    () => LESSONS.find((l) => !progress.completed[l.id])?.id ?? null,
-    [progress.completed],
+    () => LESSONS.find((l) => (l.track ?? 'adult') === progress.settings.track && !progress.completed[l.id])?.id ?? null,
+    [progress.completed, progress.settings.track],
   );
 
-  const value: Store = { progress, completeLesson, review, setSettings, reset, dueIds, nextLessonId, volatile };
+  const value: Store = { progress, completeLesson, setResume, completeStory, review, setSettings, reset, dueIds, nextLessonId, volatile };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

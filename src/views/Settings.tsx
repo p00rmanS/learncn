@@ -47,6 +47,22 @@ export default function Settings() {
       </header>
 
       <div className="card divide-y divide-line px-5 sm:px-6">
+        <Row title="Who is learning?" hint="Switches the Learn page, Home and the next-lesson button between the adult course and the little learners course.">
+          <Segmented
+            label="Learner"
+            value={s.track}
+            options={[{ id: 'adult', label: 'Adult' }, { id: 'kids', label: 'Little learner' }]}
+            onChange={(v) => setSettings({ track: v, onboarded: true })}
+          />
+        </Row>
+        <Row title="Pronunciation guide" hint='Show a "Say: nee how" line and tap-to-open mouth tips under every word and sentence.'>
+          <Segmented
+            label="Pronunciation guide"
+            value={s.showPronounce ? 'on' : 'off'}
+            options={[{ id: 'on', label: 'On' }, { id: 'off', label: 'Off' }]}
+            onChange={(v) => setSettings({ showPronounce: v === 'on' })}
+          />
+        </Row>
         <Row title="Taglish explanations" hint="Show short Taglish notes alongside the English explanations in lessons.">
           <Segmented
             label="Taglish explanations"

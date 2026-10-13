@@ -8,6 +8,7 @@ import { NO_VOICE_EVENT } from './AudioButton';
 const NAV: { name: Route['name']; label: string; icon: IconName; to: string }[] = [
   { name: 'home', label: 'Home', icon: 'home', to: href.home },
   { name: 'learn', label: 'Learn', icon: 'learn', to: href.learn },
+  { name: 'stories', label: 'Stories', icon: 'stories', to: href.stories },
   { name: 'review', label: 'Review', icon: 'review', to: href.review },
   { name: 'sound', label: 'Sound Lab', icon: 'sound', to: href.sound },
   { name: 'words', label: 'Words', icon: 'words', to: href.words },
@@ -53,7 +54,8 @@ function NoVoiceNotice() {
 
 export default function Shell({ route, children }: { route: Route; children: ReactNode }) {
   const { volatile, dueIds } = useStore();
-  const active = route.name === 'lesson' ? 'learn' : route.name;
+  const active = route.name === 'lesson' ? 'learn' : route.name === 'story' ? 'stories' : route.name;
+  const dock = NAV.filter((n) => n.name !== 'words');
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
@@ -95,9 +97,14 @@ export default function Shell({ route, children }: { route: Route; children: Rea
         {/* Mobile top bar */}
         <header className="lg:hidden sticky top-0 z-30 flex h-16 items-center justify-between bg-paper/90 px-5 backdrop-blur">
           <Brand />
-          <a href={href.settings} aria-label="Settings" className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-ink">
-            <Icon name="settings" />
-          </a>
+          <span className="flex items-center">
+            <a href={href.words} aria-label="Words dictionary" className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-ink">
+              <Icon name="words" />
+            </a>
+            <a href={href.settings} aria-label="Settings" className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-ink">
+              <Icon name="settings" />
+            </a>
+          </span>
         </header>
 
         {volatile && (
@@ -114,7 +121,7 @@ export default function Shell({ route, children }: { route: Route; children: Rea
         className="lg:hidden fixed inset-x-4 bottom-4 z-40 grid grid-cols-5 rounded-full bg-ink px-2 py-1.5 text-paper shadow-[0_12px_32px_-8px_rgb(0_0_0/0.45)]"
         aria-label="Main"
       >
-        {NAV.map((n) => (
+        {dock.map((n) => (
           <a
             key={n.name}
             href={n.to}

@@ -31,6 +31,7 @@ export type Block =
   | { type: 'tip'; label: string; body: string }
   | { type: 'pro'; body: string }
   | { type: 'remember'; body: string }
+  | { type: 'play'; title: string; body: string }
   | { type: 'table'; head: string[]; rows: string[][]; caption?: string }
   | { type: 'tones'; items: { tone: Tone; word: Word }[] }
   | { type: 'vocab'; title?: string; words: Word[] }
@@ -49,7 +50,9 @@ export interface Page {
 
 export interface Lesson {
   id: string;
-  module: 'sound' | 'convo' | 'hanzi' | 'patterns' | 'daily' | 'talk' | 'food' | 'work';
+  module: 'sound' | 'convo' | 'hanzi' | 'patterns' | 'daily' | 'talk' | 'food' | 'work' | 'kinder' | 'elementary';
+  /** Which learner this lesson is for. Defaults to adult. */
+  track?: 'adult' | 'kids';
   title: string;
   subtitle: string;
   minutes: number;

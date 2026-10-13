@@ -6,6 +6,8 @@ import Home from './views/Home';
 import Learn from './views/Learn';
 import LessonPlayer from './views/LessonPlayer';
 import Review from './views/Review';
+import Stories from './views/Stories';
+import StoryReader from './views/StoryReader';
 import SoundLab from './views/SoundLab';
 import Words from './views/Words';
 import Settings from './views/Settings';
@@ -20,6 +22,8 @@ function Routes() {
     <Shell route={route}>
       {route.name === 'home' && <Home />}
       {route.name === 'learn' && <Learn />}
+      {route.name === 'stories' && <Stories />}
+      {route.name === 'story' && <StoryReader key={route.id} storyId={route.id} />}
       {route.name === 'review' && <Review />}
       {route.name === 'sound' && <SoundLab />}
       {route.name === 'words' && <Words />}

@@ -1200,6 +1200,16 @@ export const MORE_LESSONS: Lesson[] = [
    Keyed by lesson id → page index → blocks appended to that page. */
 
 export const EXTRA: Record<string, Record<number, Block[]>> = {
+  family2: {
+    0: [
+      { type: 'remember', body: "外 means 'outside', and it marks relatives on your mother's side: 外公 (wàigōng) and 外婆 (wàipó). Father's side is 爷爷 and 奶奶, and both repeat a sound (yéye, nǎinai), so they are easy to hear. A memory aid, not a rule about families." },
+    ],
+  },
+  takeorder: {
+    0: [
+      { type: 'remember', body: 'Learn the script as five steps: ask (您想点什么？), check spice (要辣的吗？), offer more (还要别的吗？), ask to wait (请稍等), serve (请慢用). Five lines for five moments, in the order they happen.' },
+    ],
+  },
   sounds: {
     0: [
       { type: 'pro', body: 'Use headphones for this course. Tone differences are subtle, and laptop speakers blur them.' },

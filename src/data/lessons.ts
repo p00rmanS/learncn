@@ -6,6 +6,7 @@ import { PART4_LESSONS } from './lessonsPart4';
 import { PART5_LESSONS } from './lessonsPart5';
 import { PART6_LESSONS } from './lessonsPart6';
 import { PART7_LESSONS } from './lessonsPart7';
+import { KIDS_LESSONS } from './lessonsKids';
 
 export const MODULES = [
   {
@@ -48,7 +49,22 @@ export const MODULES = [
     title: 'Work and Service',
     blurb: 'Talk about jobs and welcome guests the way service staff do.',
   },
+  {
+    id: 'kinder' as const,
+    title: 'Kinder: ages 3 to 5',
+    blurb: 'Sounds, songs, animals and body parts, taught with actions and games.',
+    track: 'kids' as const,
+  },
+  {
+    id: 'elementary' as const,
+    title: 'Elementary: ages 6 to 10',
+    blurb: 'School, seasons, sports, parties and pets, in short sentences.',
+    track: 'kids' as const,
+  },
 ];
+
+export type Track = 'adult' | 'kids';
+export const moduleTrack = (m: { track?: Track }): Track => m.track ?? 'adult';
 
 const BASE_LESSONS: Lesson[] = [
   // ───────────────────────── SOUND BOOTCAMP ─────────────────────────
@@ -997,7 +1013,7 @@ const BASE_LESSONS: Lesson[] = [
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS]
+export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
@@ -1024,3 +1040,6 @@ export function lessonWords(lesson: Lesson): Word[] {
   }
   return [...seen.values()];
 }
+
+export const lessonTrack = (l: Lesson): Track => l.track ?? 'adult';
+export const lessonsFor = (t: Track): Lesson[] => LESSONS.filter((l) => lessonTrack(l) === t);
