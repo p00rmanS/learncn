@@ -59,6 +59,26 @@
   }
 }
 
+/* Little learners get a sunnier, rounder look. Same system, warmer values. */
+:root[data-track='kids'] {
+  --paper: 252 244 224;
+  --surface: 255 250 236;
+  --sunken: 246 234 202;
+  --line: 227 212 176;
+  --accent-soft: 252 229 196;
+}
+:root[data-track='kids'] .card { border-radius: 22px; }
+:root[data-track='kids'] .btn { min-height: 54px; }
+@media (prefers-color-scheme: dark) {
+  :root[data-track='kids'] {
+    --paper: 26 22 16;
+    --surface: 36 31 22;
+    --sunken: 46 40 28;
+    --line: 70 62 44;
+    --accent-soft: 62 38 26;
+  }
+}
+
 html { -webkit-text-size-adjust: 100%; }
 
 body {
@@ -125,6 +145,9 @@ button:disabled { cursor: not-allowed; }
 }
 .rise { animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
 
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.route-in { animation: fade 0.2s ease-out both; }
+
 @keyframes draw {
   from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
@@ -138,7 +161,7 @@ button:disabled { cursor: not-allowed; }
 .stamp-in { animation: pop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise, .stamp-in { animation: none; }
+  .rise, .stamp-in, .route-in { animation: none; }
   .draw { animation: none; stroke-dashoffset: 0; }
   * { transition-duration: 0.01ms !important; }
 }

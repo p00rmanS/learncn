@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import Icon, { type IconName } from './Icon';
 import Seal from './Seal';
 import { href, type Route } from '../lib/router';
-import { useStore } from '../lib/store';
+import { TEXT_SCALE, useStore } from '../lib/store';
 import { NO_VOICE_EVENT } from './AudioButton';
 
 const NAV: { name: Route['name']; label: string; icon: IconName; to: string }[] = [
@@ -53,7 +53,9 @@ function NoVoiceNotice() {
 }
 
 export default function Shell({ route, children }: { route: Route; children: ReactNode }) {
-  const { volatile, dueIds } = useStore();
+  const { volatile, dueIds, progress } = useStore();
+  const scale = TEXT_SCALE[progress.settings.textSize];
+  const routeKey = route.name + ('id' in route ? route.id : '');
   const active = route.name === 'lesson' ? 'learn' : route.name === 'story' ? 'stories' : route.name;
   const dock = NAV.filter((n) => n.name !== 'words');
 
@@ -113,7 +115,9 @@ export default function Shell({ route, children }: { route: Route; children: Rea
           </div>
         )}
 
-        <main className="mx-auto w-full max-w-[56rem] px-5 py-8 sm:px-8 lg:px-12 lg:py-14">{children}</main>
+        <main className="mx-auto w-full max-w-[56rem] px-5 py-8 sm:px-8 lg:px-12 lg:py-14" style={{ zoom: scale }}>
+          <div key={routeKey} className="route-in">{children}</div>
+        </main>
       </div>
 
       {/* Mobile floating dock */}

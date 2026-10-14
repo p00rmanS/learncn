@@ -49,7 +49,7 @@ function shuffledOrder(question: string, count: number, keep: boolean): number[]
   return order;
 }
 
-export function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; onSolved: () => void }) {
+export function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz' }>; onSolved: (firstTry: boolean) => void }) {
   // Keep natural order for number-only options (e.g. 13 / 23 / 32); shuffle everything else.
   const keepOrder = block.options.every((o) => /^[\d\s:.,A-Za-z]{1,12}$/.test(o) && /\d/.test(o));
   const order = shuffledOrder(block.question, block.options.length, keepOrder);
@@ -60,7 +60,7 @@ export function Quiz({ block, onSolved }: { block: Extract<Block, { type: 'quiz'
     if (solved || wrong.includes(i)) return;
     if (i === block.answer) {
       setSolved(true);
-      onSolved();
+      onSolved(wrong.length === 0);
     } else {
       setWrong((w) => [...w, i]);
     }
@@ -337,7 +337,7 @@ function MyName() {
 
 /* ───────────── Dispatcher ───────────── */
 
-export default function LessonBlocks({ blocks, onQuizSolved }: { blocks: Block[]; onQuizSolved: (index: number) => void }) {
+export default function LessonBlocks({ blocks, onQuizSolved }: { blocks: Block[]; onQuizSolved: (index: number, firstTry: boolean) => void }) {
   const { progress } = useStore();
 
   return (
@@ -441,7 +441,7 @@ export default function LessonBlocks({ blocks, onQuizSolved }: { blocks: Block[]
           case 'dialogue':
             return <Dialogue key={i} block={b} />;
           case 'quiz':
-            return <Quiz key={i} block={b} onSolved={() => onQuizSolved(i)} />;
+            return <Quiz key={i} block={b} onSolved={(ft) => onQuizSolved(i, ft)} />;
           case 'speak':
             return <Speak key={i} block={b} />;
           case 'myname':

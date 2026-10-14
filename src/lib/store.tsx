@@ -10,6 +10,7 @@ export interface Settings {
   track: 'adult' | 'kids';
   showPronounce: boolean;
   onboarded: boolean;
+  textSize: 'm' | 'l' | 'xl';
 }
 
 export interface Progress {
@@ -18,6 +19,7 @@ export interface Progress {
   days: Record<string, number>; // yyyy-mm-dd -> activities done
   resume: Record<string, number>; // lessonId -> last page index
   stories: Record<string, number>; // storyId -> completion time
+  log: Record<string, { lesson: number; review: number; story: number; sound: number }>; // day -> things done
   settings: Settings;
 }
 
@@ -27,7 +29,8 @@ const DEFAULTS: Progress = {
   days: {},
   resume: {},
   stories: {},
-  settings: { taglish: true, pinyin: 'always', rate: 0.85, name: '', track: 'adult', showPronounce: true, onboarded: false },
+  log: {},
+  settings: { taglish: true, pinyin: 'always', rate: 0.85, name: '', track: 'adult', showPronounce: true, onboarded: false, textSize: 'm' },
 };
 
 const KEY = 'sheng.progress.v2';
@@ -43,12 +46,15 @@ function load(): Progress {
       days: p.days ?? {},
       resume: p.resume ?? {},
       stories: p.stories ?? {},
+      log: p.log ?? {},
       settings: { ...DEFAULTS.settings, ...(p.settings ?? {}) },
     };
   } catch {
     return DEFAULTS;
   }
 }
+
+export const TEXT_SCALE = { m: 1, l: 1.15, xl: 1.3 } as const;
 
 export const dayKey = (d = new Date()) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -58,6 +64,7 @@ interface Store {
   completeLesson: (id: string) => void;
   setResume: (id: string, page: number) => void;
   completeStory: (id: string) => void;
+  logSound: () => void;
   review: (wordId: string, rating: Rating) => void;
   setSettings: (s: Partial<Settings>) => void;
   reset: () => void;
@@ -86,13 +93,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return { ...days, [k]: (days[k] ?? 0) + 1 };
   };
 
+  type Kind = 'lesson' | 'review' | 'story' | 'sound';
+  const bumpLog = (log: Progress['log'], kind: Kind) => {
+    const k = dayKey();
+    const today = log[k] ?? { lesson: 0, review: 0, story: 0, sound: 0 };
+    return { ...log, [k]: { ...today, [kind]: today[kind] + 1 } };
+  };
+
   const completeLesson = useCallback((id: string) => {
     const lesson = LESSONS.find((l) => l.id === id);
     if (!lesson) return;
     setProgress((p) => {
       const deck = { ...p.deck };
       for (const w of lessonWords(lesson)) if (!deck[w.id]) deck[w.id] = newCard();
-      return { ...p, deck, completed: { ...p.completed, [id]: p.completed[id] ?? Date.now() }, days: bumpDay(p.days) };
+      return { ...p, deck, completed: { ...p.completed, [id]: p.completed[id] ?? Date.now() }, days: bumpDay(p.days), log: bumpLog(p.log, 'lesson') };
     });
   }, []);
 
@@ -101,13 +115,17 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const completeStory = useCallback((id: string) => {
-    setProgress((p) => ({ ...p, stories: { ...p.stories, [id]: p.stories[id] ?? Date.now() }, days: bumpDay(p.days) }));
+    setProgress((p) => ({ ...p, stories: { ...p.stories, [id]: p.stories[id] ?? Date.now() }, days: bumpDay(p.days), log: bumpLog(p.log, 'story') }));
+  }, []);
+
+  const logSound = useCallback(() => {
+    setProgress((p) => ({ ...p, days: bumpDay(p.days), log: bumpLog(p.log, 'sound') }));
   }, []);
 
   const review = useCallback((wordId: string, rating: Rating) => {
     setProgress((p) => {
       const card = p.deck[wordId] ?? newCard();
-      return { ...p, deck: { ...p.deck, [wordId]: schedule(card, rating) }, days: bumpDay(p.days) };
+      return { ...p, deck: { ...p.deck, [wordId]: schedule(card, rating) }, days: bumpDay(p.days), log: bumpLog(p.log, 'review') };
     });
   }, []);
 
@@ -127,7 +145,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [progress.completed, progress.settings.track],
   );
 
-  const value: Store = { progress, completeLesson, setResume, completeStory, review, setSettings, reset, dueIds, nextLessonId, volatile };
+  const value: Store = { progress, completeLesson, setResume, completeStory, logSound, review, setSettings, reset, dueIds, nextLessonId, volatile };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

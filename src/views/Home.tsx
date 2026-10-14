@@ -105,6 +105,18 @@ export default function Home() {
   const nextModule = next ? MODULES.find((m) => m.id === next.module) : null;
   const storiesRead = STORIES.filter((s) => progress.stories[s.id]).length;
   const resumed = next ? (progress.resume[next.id] ?? 0) > 0 : false;
+  const today = progress.log[dayKey()] ?? { lesson: 0, review: 0, story: 0, sound: 0 };
+  const nextStory = STORIES.find((s) => !progress.stories[s.id] && (kids ? s.level !== 'adult' : s.level === 'adult')) ?? STORIES.find((s) => !progress.stories[s.id]);
+  const plan = [
+    { label: 'Warm up your ears', hint: 'Five tone questions in the Sound Lab', to: href.sound, done: today.sound > 0 },
+    next
+      ? { label: resumed ? 'Resume your lesson' : 'Learn something new', hint: next.title, to: href.lesson(next.id), done: today.lesson > 0 }
+      : { label: 'Revisit a lesson', hint: 'You have finished every lesson in this track', to: href.learn, done: today.lesson > 0 },
+    { label: 'Review your words', hint: dueIds.length > 0 ? `${dueIds.length} words are ready` : known > 0 ? 'Nothing due, great work' : 'Unlocks after your first lesson', to: href.review, done: today.review > 0 || (known > 0 && dueIds.length === 0) },
+    nextStory
+      ? { label: 'Read a story', hint: nextStory.title, to: href.story(nextStory.id), done: today.story > 0 }
+      : { label: 'Read a story', hint: 'You have read them all', to: href.stories, done: true },
+  ];
 
   return (
     <div className="space-y-16 sm:space-y-20">
@@ -191,6 +203,35 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Today's plan */}
+      <section className="rise" style={{ ['--i' as string]: 4 }}>
+        <div className="flex items-end justify-between border-b-2 border-ink pb-3">
+          <h2 className="text-[28px]">Today&apos;s plan</h2>
+          <span className="eyebrow">About {Math.max(10, (next?.minutes ?? 8) + 7)} minutes</span>
+        </div>
+        <ul>
+          {plan.map((p) => (
+            <li key={p.label} className="border-b border-line">
+              <a href={p.to} className="group -mx-3 flex items-center gap-4 rounded-xl px-3 py-4 transition-colors hover:bg-surface">
+                <span
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border ${p.done ? 'border-accent bg-accent text-accent-ink' : 'border-ink/30 text-transparent'}`}
+                  aria-hidden="true"
+                >
+                  <Icon name="check" size={16} />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className={`block font-display text-[20px] font-medium leading-tight ${p.done ? 'text-muted line-through decoration-1' : ''}`}>{p.label}</span>
+                  <span className="block text-[13px] text-muted">{p.hint}</span>
+                </span>
+                <span className="sr-only">{p.done ? 'Done today' : 'Not done yet'}</span>
+                <Icon name="arrow" size={18} className="shrink-0 text-muted opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-[13px] text-muted">A suggestion, not a requirement. Do as much or as little as you like.</p>
+      </section>
 
       {/* Practice links */}
       <section className="grid gap-px overflow-hidden rounded-[20px] border border-line bg-line sm:grid-cols-3">

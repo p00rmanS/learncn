@@ -25,12 +25,14 @@ export default function Review() {
   const [practice, setPractice] = useState(false);
   const [queue, setQueue] = useState<string[] | null>(null);
   const [count, setCount] = useState(0);
+  const [tally, setTally] = useState<Record<Rating, number>>({ again: 0, hard: 0, good: 0, easy: 0 });
   const [revealed, setRevealed] = useState(false);
 
   const start = (all: boolean) => {
     setPractice(all);
     setQueue(all ? Object.keys(progress.deck) : [...dueIds]);
     setCount(0);
+    setTally({ again: 0, hard: 0, good: 0, easy: 0 });
     setRevealed(false);
   };
 
@@ -44,6 +46,7 @@ export default function Review() {
     const rest = queue.slice(1);
     setQueue(r === 'again' ? [...rest, currentId] : rest);
     setCount((c) => c + 1);
+    setTally((t) => ({ ...t, [r]: t[r] + 1 }));
     setRevealed(false);
   };
 
@@ -118,6 +121,18 @@ export default function Review() {
       <Empty
         title={count === 0 ? 'Nothing to review' : `Done. ${count} cards reviewed.`}
         body="Come back when more words are due. In the meantime, a lesson or the Sound Lab keeps your ears sharp."
+        extra={
+          count > 0 ? (
+            <dl className="mx-auto grid max-w-sm grid-cols-4 divide-x divide-line border-y border-line text-center">
+              {([['again', 'Again'], ['hard', 'Hard'], ['good', 'Good'], ['easy', 'Easy']] as const).map(([k, label]) => (
+                <div key={k} className="py-4">
+                  <dd className="numeral text-[32px] font-light leading-none tabular-nums">{tally[k]}</dd>
+                  <dt className="mt-1.5 text-[12px] text-muted">{label}</dt>
+                </div>
+              ))}
+            </dl>
+          ) : null
+        }
         action={
           <div className="flex flex-wrap gap-3 justify-center">
             <a href={href.learn} className="btn-primary">Lessons</a>
@@ -192,7 +207,7 @@ export default function Review() {
   );
 }
 
-function Empty({ title, body, action, onAgain }: { title: string; body: string; action: React.ReactNode; onAgain?: () => void }) {
+function Empty({ title, body, action, onAgain, extra }: { title: string; body: string; action: React.ReactNode; onAgain?: () => void; extra?: React.ReactNode }) {
   return (
     <div className="mx-auto max-w-md py-16 text-center space-y-4">
       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -200,6 +215,7 @@ function Empty({ title, body, action, onAgain }: { title: string; body: string; 
       </div>
       <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
       <p className="text-muted">{body}</p>
+      {extra}
       <div className="pt-2">{action}</div>
       {onAgain && (
         <button type="button" onClick={onAgain} className="text-sm text-muted underline underline-offset-2 hover:text-ink">

@@ -55,6 +55,14 @@ export default function Settings() {
             onChange={(v) => setSettings({ track: v, onboarded: true })}
           />
         </Row>
+        <Row title="Text size" hint="Makes lessons, stories and words larger. Helpful for young readers or tired eyes.">
+          <Segmented
+            label="Text size"
+            value={s.textSize}
+            options={[{ id: 'm', label: 'Normal' }, { id: 'l', label: 'Large' }, { id: 'xl', label: 'Extra large' }]}
+            onChange={(v) => setSettings({ textSize: v })}
+          />
+        </Row>
         <Row title="Pronunciation guide" hint='Show a "Say: nee how" line and tap-to-open mouth tips under every word and sentence.'>
           <Segmented
             label="Pronunciation guide"

@@ -4,7 +4,7 @@ import LessonBlocks from '../components/LessonBlocks';
 import Icon from '../components/Icon';
 import Seal from '../components/Seal';
 import { href } from '../lib/router';
-import { useStore } from '../lib/store';
+import { TEXT_SCALE, useStore } from '../lib/store';
 import { stopSpeaking } from '../lib/audio';
 
 export default function LessonPlayer({ lessonId }: { lessonId: string }) {
@@ -13,6 +13,7 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const pageCount = lesson?.pages.length ?? 0;
   const [step, setStep] = useState(() => Math.max(0, Math.min(progress.resume[lessonId] ?? 0, pageCount - 1)));
   const [solved, setSolved] = useState<Record<string, true>>({});
+  const [firstTry, setFirstTry] = useState<Record<string, boolean>>({});
   const [done, setDone] = useState(false);
 
   const page = lesson?.pages[step];
@@ -79,6 +80,8 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const nextLesson = trackList[lessonIndex + 1];
   const alreadyDone = !!progress.completed[lesson.id];
   const pct = ((step + 1) / pageCount) * 100;
+  const quizTotal = Object.keys(firstTry).length;
+  const quizFirst = Object.values(firstTry).filter(Boolean).length;
 
   /* ── Completion: the seal moment ── */
   if (done) {
@@ -93,6 +96,13 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
           <p className="mx-auto mt-5 max-w-md text-[18px] leading-relaxed text-muted rise" style={{ ['--i' as string]: 5 }}>
             You can now {lesson.goal.charAt(0).toLowerCase() + lesson.goal.slice(1)}
           </p>
+
+          {quizTotal > 0 && (
+            <div className="mx-auto mt-8 flex max-w-xs items-baseline justify-center gap-3 rise" style={{ ['--i' as string]: 5 }}>
+              <span className="numeral text-[56px] font-light leading-none tabular-nums">{quizFirst}<span className="text-[26px] text-muted">/{quizTotal}</span></span>
+              <span className="text-left text-[13px] leading-tight text-muted">right on<br />the first try</span>
+            </div>
+          )}
 
           {words.length > 0 && (
             <div className="mt-10 border-y border-line py-6 text-left rise" style={{ ['--i' as string]: 6 }}>
@@ -157,13 +167,16 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
       </header>
 
       <main className="flex-1">
-        <div key={step} className="mx-auto w-full max-w-2xl px-5 pb-44 pt-8 rise sm:px-6 sm:pt-12">
+        <div key={step} className="mx-auto w-full max-w-2xl px-5 pb-44 pt-8 rise sm:px-6 sm:pt-12" style={{ zoom: TEXT_SCALE[progress.settings.textSize] }}>
           <p className="eyebrow text-accent">
             <span className="mr-2 tabular-nums">{String(step + 1).padStart(2, '0')}</span>
             {page.kicker}
           </p>
           <h1 className="mb-9 mt-3 text-[34px] leading-[1.08] sm:text-[46px]">{page.title}</h1>
-          <LessonBlocks blocks={page.blocks} onQuizSolved={(i) => setSolved((s) => ({ ...s, [`${step}-${i}`]: true }))} />
+          <LessonBlocks blocks={page.blocks} onQuizSolved={(i, ft) => {
+              setSolved((s) => ({ ...s, [`${step}-${i}`]: true }));
+              setFirstTry((m) => (`${step}-${i}` in m ? m : { ...m, [`${step}-${i}`]: ft }));
+            }} />
         </div>
       </main>
 

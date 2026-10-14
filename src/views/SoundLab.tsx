@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import AudioButton from '../components/AudioButton';
 import Icon from '../components/Icon';
 import ToneGraph from '../components/ToneGraph';
@@ -64,7 +64,8 @@ function pickQuestion(prev?: { s: number; t: number }) {
 }
 
 function Trainer() {
-  const { progress } = useStore();
+  const { progress, logSound } = useStore();
+  const logged = useRef(false);
   const [q, setQ] = useState(() => pickQuestion());
   const [answered, setAnswered] = useState<number | null>(null);
   const [score, setScore] = useState({ right: 0, total: 0 });
@@ -83,6 +84,10 @@ function Trainer() {
 
   const answer = (i: number) => {
     if (answered !== null) return;
+    if (!logged.current) {
+      logged.current = true;
+      logSound();
+    }
     setAnswered(i);
     setScore((s) => ({ right: s.right + (i === q.t ? 1 : 0), total: s.total + 1 }));
   };
@@ -92,6 +97,21 @@ function Trainer() {
     setAnswered(null);
   };
 
+  // Keyboard: 1-4 answer, Space or N for the next one, R to replay.
+  useEffect(() => {
+    if (!started) return;
+    const on = (e: KeyboardEvent) => {
+      if ((e.target as HTMLElement)?.tagName === 'INPUT') return;
+      if (['1', '2', '3', '4'].includes(e.key)) answer(Number(e.key) - 1);
+      else if ((e.key === ' ' || e.key.toLowerCase() === 'n') && answered !== null) {
+        e.preventDefault();
+        next();
+      } else if (e.key.toLowerCase() === 'r') void play();
+    };
+    window.addEventListener('keydown', on);
+    return () => window.removeEventListener('keydown', on);
+  });
+
   if (!started) {
     return (
       <div className="card p-8 text-center space-y-4">
@@ -99,6 +119,7 @@ function Trainer() {
         <p className="text-muted max-w-md mx-auto">
           You will hear one syllable. Choose its tone from the four shapes. Aim for 80% and keep going: this is the fastest way to train your ear.
         </p>
+        <p className="text-sm text-muted">Tip: press 1 to 4 to answer, Space for the next one, R to hear it again.</p>
         <button type="button" onClick={() => { setStarted(true); }} className="btn-primary">
           Start <Icon name="arrow" size={18} />
         </button>
