@@ -7,6 +7,8 @@ import Home from './views/Home';
 import Learn from './views/Learn';
 import LessonPlayer from './views/LessonPlayer';
 import Review from './views/Review';
+import Progress from './views/Progress';
+import ToastHost from './components/ToastHost';
 import Stories from './views/Stories';
 import StoryReader from './views/StoryReader';
 import SoundLab from './views/SoundLab';
@@ -31,6 +33,7 @@ function Routes() {
       {route.name === 'learn' && <Learn />}
       {route.name === 'stories' && <Stories />}
       {route.name === 'story' && <StoryReader key={route.id} storyId={route.id} />}
+      {route.name === 'progress' && <Progress />}
       {route.name === 'review' && <Review />}
       {route.name === 'sound' && <SoundLab />}
       {route.name === 'words' && <Words />}
@@ -44,6 +47,7 @@ export default function App() {
     <StoreProvider>
       <SvgDefs />
       <Routes />
+      <ToastHost />
     </StoreProvider>
   );
 }

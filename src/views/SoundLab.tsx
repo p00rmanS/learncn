@@ -64,8 +64,7 @@ function pickQuestion(prev?: { s: number; t: number }) {
 }
 
 function Trainer() {
-  const { progress, logSound } = useStore();
-  const logged = useRef(false);
+  const { progress, soundAnswer } = useStore();
   const [q, setQ] = useState(() => pickQuestion());
   const [answered, setAnswered] = useState<number | null>(null);
   const [score, setScore] = useState({ right: 0, total: 0 });
@@ -84,10 +83,7 @@ function Trainer() {
 
   const answer = (i: number) => {
     if (answered !== null) return;
-    if (!logged.current) {
-      logged.current = true;
-      logSound();
-    }
+    soundAnswer(i === q.t);
     setAnswered(i);
     setScore((s) => ({ right: s.right + (i === q.t ? 1 : 0), total: s.total + 1 }));
   };

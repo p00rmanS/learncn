@@ -4,12 +4,14 @@ import Seal from './Seal';
 import { href, type Route } from '../lib/router';
 import { TEXT_SCALE, useStore } from '../lib/store';
 import { NO_VOICE_EVENT } from './AudioButton';
+import StreakChip from './StreakChip';
 
 const NAV: { name: Route['name']; label: string; icon: IconName; to: string }[] = [
   { name: 'home', label: 'Home', icon: 'home', to: href.home },
   { name: 'learn', label: 'Learn', icon: 'learn', to: href.learn },
   { name: 'stories', label: 'Stories', icon: 'stories', to: href.stories },
   { name: 'review', label: 'Review', icon: 'review', to: href.review },
+  { name: 'progress', label: 'Progress', icon: 'chart', to: href.progress },
   { name: 'sound', label: 'Sound Lab', icon: 'sound', to: href.sound },
   { name: 'words', label: 'Words', icon: 'words', to: href.words },
 ];
@@ -20,7 +22,7 @@ function Brand() {
       <Seal char="声" size={38} />
       <span className="leading-none">
         <span className="block font-display text-[22px] font-semibold tracking-tight">Shēng</span>
-        <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">Mandarin from zero</span>
+        <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.2em] text-muted max-[430px]:hidden">Mandarin from zero</span>
       </span>
     </a>
   );
@@ -57,14 +59,15 @@ export default function Shell({ route, children }: { route: Route; children: Rea
   const scale = TEXT_SCALE[progress.settings.textSize];
   const routeKey = route.name + ('id' in route ? route.id : '');
   const active = route.name === 'lesson' ? 'learn' : route.name === 'story' ? 'stories' : route.name;
-  const dock = NAV.filter((n) => n.name !== 'words');
+  const dock = NAV.filter((n) => n.name !== 'words' && n.name !== 'sound');
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex flex-col sticky top-0 h-screen border-r border-line px-7 py-9">
         <Brand />
-        <nav className="mt-14 flex flex-col" aria-label="Main">
+        <div className="mt-6"><StreakChip /></div>
+        <nav className="mt-8 flex flex-col" aria-label="Main">
           {NAV.map((n, i) => (
             <a
               key={n.name}
@@ -91,7 +94,7 @@ export default function Shell({ route, children }: { route: Route; children: Rea
           >
             <Icon name="settings" size={18} /> Settings
           </a>
-          <p className="text-[12px] leading-relaxed text-muted">Sound first. Characters second. No streaks, no guilt.</p>
+          <p className="text-[12px] leading-relaxed text-muted">Sound first. Characters second. A gentle streak with freezes for busy days.</p>
         </div>
       </aside>
 
@@ -99,7 +102,11 @@ export default function Shell({ route, children }: { route: Route; children: Rea
         {/* Mobile top bar */}
         <header className="lg:hidden sticky top-0 z-30 flex h-16 items-center justify-between bg-paper/90 px-5 backdrop-blur">
           <Brand />
-          <span className="flex items-center">
+          <span className="flex items-center gap-0.5">
+            <StreakChip />
+            <a href={href.sound} aria-label="Sound Lab" className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-ink">
+              <Icon name="sound" />
+            </a>
             <a href={href.words} aria-label="Words dictionary" className="flex h-11 w-11 items-center justify-center rounded-full text-muted hover:text-ink">
               <Icon name="words" />
             </a>

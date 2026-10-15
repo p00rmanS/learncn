@@ -5,6 +5,8 @@ import ToneGraph from '../components/ToneGraph';
 import { href } from '../lib/router';
 import { dayKey, useStore } from '../lib/store';
 import { WORD_BY_ID } from '../data/words';
+import GoalRing from '../components/GoalRing';
+import { useGame } from '../lib/game';
 
 function greeting() {
   const h = new Date().getHours();
@@ -99,6 +101,7 @@ export default function Home() {
   const next = nextLessonId ? getLesson(nextLessonId) : null;
   const completed = lessons.filter((l) => progress.completed[l.id]).length;
   const known = Object.keys(progress.deck).length;
+  const game = useGame();
   const name = progress.settings.name.trim();
   const firstDue = dueIds[0] ? WORD_BY_ID[dueIds[0]] : null;
   const nextNumber = next ? lessons.indexOf(next) + 1 : 0;
@@ -184,6 +187,40 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Streak, goal, level */}
+      {game.show && (
+        <section className="space-y-3">
+          {game.atRisk && (
+            <div className="flex items-center gap-4 rounded-2xl bg-accent-soft px-5 py-4" role="status">
+              <Icon name="flame" size={26} className="shrink-0 text-accent" />
+              <p className="text-[15px] leading-snug">
+                <b>Your {game.count}-day streak is waiting.</b> Earn {game.xpLeft} more XP today to keep it going.
+                {game.freezes > 0 ? ` You have ${game.freezes} freeze${game.freezes > 1 ? 's' : ''} in reserve, so a busy day is okay.` : ''}
+              </p>
+            </div>
+          )}
+          <a href={href.progress} className="grid grid-cols-3 divide-x divide-line overflow-hidden rounded-2xl border border-line transition-colors hover:bg-surface">
+            <div className="px-3 py-5 text-center sm:px-6">
+              <div className="numeral flex items-center justify-center gap-1.5 text-[36px] font-light leading-none tabular-nums sm:text-[44px]">
+                <Icon name="flame" size={30} className={game.count > 0 && game.doneToday ? 'text-accent' : game.count > 0 ? 'text-accent/60' : 'text-line'} />
+                {game.count}
+              </div>
+              <div className="mt-2 text-[12px] text-muted sm:text-[13px]">day streak</div>
+            </div>
+            <div className="flex flex-col items-center px-3 py-4 sm:px-6">
+              <GoalRing pct={game.goalPct} done={game.goalMet} size={56} stroke={6}>
+                {game.goalMet ? <Icon name="check" size={20} className="text-good" /> : <span className="numeral text-[13px] tabular-nums">{game.xpToday}</span>}
+              </GoalRing>
+              <div className="mt-1.5 text-[12px] text-muted sm:text-[13px]">{game.goalMet ? 'goal reached' : `${game.xpToday}/${game.goal} XP`}</div>
+            </div>
+            <div className="px-3 py-5 text-center sm:px-6">
+              <div className="numeral text-[36px] font-light leading-none tabular-nums sm:text-[44px]">{game.level.level}</div>
+              <div className="mt-2 text-[12px] text-muted sm:text-[13px]">{game.level.name.en}</div>
+            </div>
+          </a>
+        </section>
+      )}
 
       {/* Up next */}
       {next && (

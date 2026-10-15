@@ -55,6 +55,22 @@ export default function Settings() {
             onChange={(v) => setSettings({ track: v, onboarded: true })}
           />
         </Row>
+        <Row title="Daily goal" hint="XP to earn each day to keep your streak. Lessons give 20 or more, so Regular is one lesson a day.">
+          <Segmented
+            label="Daily goal"
+            value={String(s.dailyGoal) as '10' | '20' | '30' | '50'}
+            options={[{ id: '10', label: 'Casual' }, { id: '20', label: 'Regular' }, { id: '30', label: 'Serious' }, { id: '50', label: 'Intense' }]}
+            onChange={(v) => setSettings({ dailyGoal: Number(v) })}
+          />
+        </Row>
+        <Row title="Streaks, XP and badges" hint="Show the streak flame, XP, levels and celebrations. Turn off for a quieter, pressure-free app.">
+          <Segmented
+            label="Streaks, XP and badges"
+            value={s.showGame ? 'on' : 'off'}
+            options={[{ id: 'on', label: 'On' }, { id: 'off', label: 'Off' }]}
+            onChange={(v) => setSettings({ showGame: v === 'on' })}
+          />
+        </Row>
         <Row title="Text size" hint="Makes lessons, stories and words larger. Helpful for young readers or tired eyes.">
           <Segmented
             label="Text size"

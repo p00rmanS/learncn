@@ -1200,6 +1200,11 @@ export const MORE_LESSONS: Lesson[] = [
    Keyed by lesson id → page index → blocks appended to that page. */
 
 export const EXTRA: Record<string, Record<number, Block[]>> = {
+  sim: {
+    0: [
+      { type: 'remember', body: '流量 is "flow amount": data flows like water through a pipe. 充值 is "fill value", pouring credit into your account, like filling a cup. 手机卡 is simply "phone card". Each word is a small picture.' },
+    ],
+  },
   family2: {
     0: [
       { type: 'remember', body: "外 means 'outside', and it marks relatives on your mother's side: 外公 (wàigōng) and 外婆 (wàipó). Father's side is 爷爷 and 奶奶, and both repeat a sound (yéye, nǎinai), so they are easy to hear. A memory aid, not a rule about families." },

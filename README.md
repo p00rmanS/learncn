@@ -10,8 +10,9 @@ npm run build
 
 ## What's inside
 
-- **Little Learners track**: 27 lessons for kinder (3 to 5) and elementary (6 to 10): vowels and consonants chants, animals, body, songs, school, seasons, parties. Switch on Home, Learn or Settings.
-- **Stories**: 14 graded stories (kinder, elementary, adult) with pinyin, a "Say it" guide and English on every line, plus comprehension questions.
+- **Streaks, XP and levels**: a daily goal you choose (10/20/30/50 XP), a streak that grows each day you reach it, streak freezes earned every 7 days (max 2) that cover a missed day, 10 levels with Chinese names, 14 badges, a weekly calendar and XP chart on the Progress page. Logic lives in `src/lib/xp.ts` (pure, tested). Turn it all off in Settings.
+- **Little Learners track**: 31 lessons for kinder (3 to 5) and elementary (6 to 10): vowels and consonants chants, animals, body, songs, school, seasons, parties. Switch on Home, Learn or Settings.
+- **Stories**: 17 graded stories (kinder, elementary, adult) with pinyin, a "Say it" guide and English on every line, plus comprehension questions.
 - **Pronunciation guide**: every word and sentence shows "Say: nee how" and tap-to-open mouth tips (`src/lib/pronounce.ts`).
 - **Learn**: 9 lessons in two modules (Sound Bootcamp, First Conversations). Each lesson is a short sequence of pages with audio, pitch graphs, dialogues, quizzes and a speaking step.
 - **Review**: spaced repetition over every word you finish learning (`src/lib/srs.ts`). Keyboard: Space to reveal, 1–4 to grade.

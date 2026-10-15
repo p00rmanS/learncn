@@ -6,6 +6,7 @@ export type Route =
   | { name: 'lesson'; id: string }
   | { name: 'stories' }
   | { name: 'story'; id: string }
+  | { name: 'progress' }
   | { name: 'review' }
   | { name: 'sound' }
   | { name: 'words' }
@@ -18,6 +19,7 @@ export function parseHash(hash: string): Route {
     case 'lesson': return parts[1] ? { name: 'lesson', id: parts[1] } : { name: 'learn' };
     case 'stories': return { name: 'stories' };
     case 'story': return parts[1] ? { name: 'story', id: parts[1] } : { name: 'stories' };
+    case 'progress': return { name: 'progress' };
     case 'review': return { name: 'review' };
     case 'sound': return { name: 'sound' };
     case 'words': return { name: 'words' };
@@ -45,6 +47,7 @@ export const href = {
   lesson: (id: string) => `#/lesson/${id}`,
   stories: '#/stories',
   story: (id: string) => `#/story/${id}`,
+  progress: '#/progress',
   review: '#/review',
   sound: '#/sound',
   words: '#/words',

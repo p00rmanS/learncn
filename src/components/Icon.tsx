@@ -1,4 +1,7 @@
 const PATHS = {
+  flame: 'M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z',
+  shield: 'M12 3l7 3v5.2c0 4.4-2.9 7.8-7 9.8-4.1-2-7-5.4-7-9.8V6z',
+  chart: 'M5 20V11M12 20V4M19 20v-6',
   home: 'M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10',
   learn: 'M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z',
   stories: 'M6 3.5h9l3 3V20.5H6zM14.5 3.5v3.5H18M9 11h6M9 14.5h6M9 18h4',
@@ -22,7 +25,7 @@ const PATHS = {
 export type IconName = keyof typeof PATHS;
 
 export default function Icon({ name, size = 20, className = '' }: { name: IconName; size?: number; className?: string }) {
-  const filled = name === 'play' || name === 'stop';
+  const filled = name === 'play' || name === 'stop' || name === 'flame';
   return (
     <svg
       width={size}

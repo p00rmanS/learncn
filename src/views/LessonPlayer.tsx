@@ -6,6 +6,9 @@ import Seal from '../components/Seal';
 import { href } from '../lib/router';
 import { TEXT_SCALE, useStore } from '../lib/store';
 import { stopSpeaking } from '../lib/audio';
+import { lessonXp } from '../lib/xp';
+import { useGame } from '../lib/game';
+import GoalRing from '../components/GoalRing';
 
 export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
@@ -15,6 +18,10 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const [solved, setSolved] = useState<Record<string, true>>({});
   const [firstTry, setFirstTry] = useState<Record<string, boolean>>({});
   const [done, setDone] = useState(false);
+  const [xpGain, setXpGain] = useState(0);
+  const game = useGame();
+  const quizTotal = Object.keys(firstTry).length;
+  const quizFirst = Object.values(firstTry).filter(Boolean).length;
 
   const page = lesson?.pages[step];
   const quizIdx = page ? page.blocks.map((b, i) => (b.type === 'quiz' ? i : -1)).filter((i) => i >= 0) : [];
@@ -36,13 +43,14 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const goNext = useCallback(() => {
     if (!lesson || !pageSolved) return;
     if (isLast) {
-      completeLesson(lesson.id);
+      setXpGain(lessonXp({ firstTry: quizFirst, total: quizTotal, alreadyDone: !!progress.completed[lesson.id] }));
+      completeLesson(lesson.id, { firstTry: quizFirst, total: quizTotal });
       setResume(lesson.id, 0);
       setDone(true);
     } else {
       setStep((s) => s + 1);
     }
-  }, [lesson, pageSolved, isLast, completeLesson, setResume]);
+  }, [lesson, pageSolved, isLast, completeLesson, setResume, quizFirst, quizTotal, progress.completed]);
 
   const goBack = useCallback(() => setStep((s) => Math.max(0, s - 1)), []);
 
@@ -80,8 +88,6 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const nextLesson = trackList[lessonIndex + 1];
   const alreadyDone = !!progress.completed[lesson.id];
   const pct = ((step + 1) / pageCount) * 100;
-  const quizTotal = Object.keys(firstTry).length;
-  const quizFirst = Object.values(firstTry).filter(Boolean).length;
 
   /* ── Completion: the seal moment ── */
   if (done) {
@@ -96,6 +102,28 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
           <p className="mx-auto mt-5 max-w-md text-[18px] leading-relaxed text-muted rise" style={{ ['--i' as string]: 5 }}>
             You can now {lesson.goal.charAt(0).toLowerCase() + lesson.goal.slice(1)}
           </p>
+
+          {game.show && (
+            <div className="mx-auto mt-8 grid max-w-md grid-cols-3 divide-x divide-line rounded-2xl border border-line rise" style={{ ['--i' as string]: 5 }}>
+              <div className="px-3 py-4">
+                <div className="numeral text-[34px] font-light leading-none tabular-nums">+{xpGain}</div>
+                <div className="mt-2 text-[12px] text-muted">XP earned</div>
+              </div>
+              <div className="px-3 py-4">
+                <div className="numeral flex items-center justify-center gap-1 text-[34px] font-light leading-none tabular-nums">
+                  <Icon name="flame" size={26} className={game.count > 0 ? 'text-accent' : 'text-line'} />
+                  {game.count}
+                </div>
+                <div className="mt-2 text-[12px] text-muted">{game.doneToday ? 'day streak' : `${game.xpLeft} XP to extend`}</div>
+              </div>
+              <div className="flex flex-col items-center px-3 py-3">
+                <GoalRing pct={game.goalPct} done={game.goalMet} size={46} stroke={5}>
+                  {game.goalMet ? <Icon name="check" size={18} className="text-good" /> : null}
+                </GoalRing>
+                <div className="mt-1 text-[12px] text-muted tabular-nums">{game.xpToday}/{game.goal} today</div>
+              </div>
+            </div>
+          )}
 
           {quizTotal > 0 && (
             <div className="mx-auto mt-8 flex max-w-xs items-baseline justify-center gap-3 rise" style={{ ['--i' as string]: 5 }}>
