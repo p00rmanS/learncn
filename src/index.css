@@ -148,6 +148,13 @@ button:disabled { cursor: not-allowed; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 .route-in { animation: fade 0.2s ease-out both; }
 
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.nudge { animation: nudge 0.32s ease-in-out; }
+
 @keyframes draw {
   from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
@@ -161,7 +168,7 @@ button:disabled { cursor: not-allowed; }
 .stamp-in { animation: pop 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both; }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise, .stamp-in, .route-in { animation: none; }
+  .rise, .stamp-in, .route-in, .nudge { animation: none; }
   .draw { animation: none; stroke-dashoffset: 0; }
   * { transition-duration: 0.01ms !important; }
 }

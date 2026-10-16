@@ -9,6 +9,7 @@ import { PART7_LESSONS } from './lessonsPart7';
 import { KIDS_LESSONS } from './lessonsKids';
 import { PART8_LESSONS } from './lessonsPart8';
 import { PART9_LESSONS } from './lessonsPart9';
+import { PART10_LESSONS } from './lessonsPart10';
 
 export const MODULES = [
   {
@@ -1012,10 +1013,38 @@ const BASE_LESSONS: Lesson[] = [
   },
 ];
 
+/** Fine-tune the teaching order inside a chapter: lesson id -> the lesson it should follow. */
+const FOLLOWS: Record<string, string> = {
+  'k-rhyme': 'k-count',
+  'k-vehicles': 'k-animals',
+  'k-clothes': 'k-body',
+  'k-twinkle': 'k-song',
+  'k-weather': 'k-colors',
+  'e-manners': 'e-school',
+  'e-home': 'e-day',
+  'e-calendar': 'e-seasons',
+  'e-fruit': 'e-nature',
+  'e-jobs': 'e-pets',
+};
+
+function inTeachingOrder(list: Lesson[]): Lesson[] {
+  const out = list.filter((l) => !FOLLOWS[l.id]);
+  const lastPlaced: Record<string, string> = {};
+  for (const l of list.filter((x) => FOLLOWS[x.id])) {
+    const target = FOLLOWS[l.id];
+    const anchor = lastPlaced[target] ?? target;
+    const at = out.findIndex((x) => x.id === anchor);
+    if (at >= 0) out.splice(at + 1, 0, l);
+    else out.push(l);
+    lastPlaced[target] = l.id;
+  }
+  return out;
+}
+
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS]
+const SORTED_LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS, ...PART10_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
@@ -1024,6 +1053,8 @@ export const LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LES
   .map((l, i) => ({ l, i }))
   .sort((a, b) => moduleOrder(a.l) - moduleOrder(b.l) || a.i - b.i)
   .map(({ l }) => l);
+
+export const LESSONS: Lesson[] = inTeachingOrder(SORTED_LESSONS);
 
 export function getLesson(id: string): Lesson | undefined {
   return LESSONS.find((l) => l.id === id);

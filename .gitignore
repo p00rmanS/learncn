@@ -11,3 +11,5 @@ dist/
 *~
 legacy/
 .claude/
+scripts/.audit.mjs
+scripts/audit.mjs

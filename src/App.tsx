@@ -8,6 +8,7 @@ import Learn from './views/Learn';
 import LessonPlayer from './views/LessonPlayer';
 import Review from './views/Review';
 import Progress from './views/Progress';
+import Checkpoint from './views/Checkpoint';
 import ToastHost from './components/ToastHost';
 import Stories from './views/Stories';
 import StoryReader from './views/StoryReader';
@@ -34,6 +35,7 @@ function Routes() {
       {route.name === 'stories' && <Stories />}
       {route.name === 'story' && <StoryReader key={route.id} storyId={route.id} />}
       {route.name === 'progress' && <Progress />}
+      {route.name === 'checkpoint' && <Checkpoint key={route.id} moduleId={route.id} />}
       {route.name === 'review' && <Review />}
       {route.name === 'sound' && <SoundLab />}
       {route.name === 'words' && <Words />}

@@ -620,4 +620,102 @@ export const STORIES: Story[] = [
       { question: 'What does the hairdresser do first?', options: ['Wash the hair', 'Cut the hair', 'Dye the hair'], answer: 0, explain: '先给我洗头 means he washes it first.' },
     ],
   },
+
+  {
+    id: 'hotpot-night',
+    title: 'Hot Pot Night',
+    titleZh: '火锅之夜',
+    level: 'adult',
+    minutes: 4,
+    summary: 'Two friends order a split pot and share a meal.',
+    proTip: 'Notice 我们要…, the easy way to order for a group, and 再来一份, "one more portion". Both work in almost any restaurant.',
+    focus: [
+      { py: 'yuānyāngguō', note: 'Three first tones in a row: keep your voice high and flat, then relax.' },
+      { py: 'gānbēi', note: 'Both syllables are first tone: gān bēi, high and even.' },
+    ],
+    words: [
+      { zh: '火锅', py: 'huǒguō', en: 'hot pot' },
+      { zh: '鸳鸯锅', py: 'yuānyāngguō', en: 'split pot' },
+      { zh: '羊肉', py: 'yángròu', en: 'lamb' },
+      { zh: '干杯', py: 'gānbēi', en: 'cheers' },
+    ],
+    lines: [
+      { zh: '今天晚上我和朋友吃火锅。', py: 'Jīntiān wǎnshang wǒ hé péngyou chī huǒguō.', en: 'Tonight I eat hot pot with a friend.' },
+      { zh: '我们要一个鸳鸯锅。', py: 'Wǒmen yào yí ge yuānyāngguō.', en: 'We order a split pot.' },
+      { zh: '朋友喜欢吃辣的。', py: 'Péngyou xǐhuan chī là de.', en: 'My friend likes spicy food.' },
+      { zh: '我不太能吃辣。', py: 'Wǒ bú tài néng chī là.', en: "I can't handle much spice." },
+      { zh: '我们点了羊肉和豆腐。', py: 'Wǒmen diǎn le yángròu hé dòufu.', en: 'We order lamb and tofu.' },
+      { zh: '再来一份羊肉！', py: 'Zài lái yí fèn yángròu!', en: 'One more portion of lamb!' },
+      { zh: '我们说：“干杯！”', py: 'Wǒmen shuō: “Gānbēi!”', en: 'We say, "Cheers!"' },
+    ],
+    questions: [
+      { question: 'Why do they order a split pot?', options: ['One likes spicy, one does not', 'It is cheaper', 'They have no soup'], answer: 0, explain: 'One friend likes spice and the other cannot handle it.' },
+      { question: 'What do they order more of?', options: ['Lamb', 'Beef', 'Rice'], answer: 0, explain: '再来一份羊肉.' },
+    ],
+  },
+
+  {
+    id: 'hospital-visit',
+    title: 'A Visit to the Doctor',
+    titleZh: '去看病',
+    level: 'adult',
+    minutes: 4,
+    summary: 'A traveller feels unwell, registers and gets advice.',
+    proTip: 'Watch for 先…然后…, "first … then …". It turns any process, like registering and seeing the doctor, into an easy sequence.',
+    focus: [
+      { py: 'guà hào', note: 'Both are falling tones: say them short and sharp.' },
+      { py: 'xiūxi', note: 'The second syllable is light and quick: "shyoh-shee".' },
+    ],
+    words: [
+      { zh: '挂号', py: 'guà hào', en: 'to register' },
+      { zh: '发烧', py: 'fāshāo', en: 'to have a fever' },
+      { zh: '休息', py: 'xiūxi', en: 'to rest' },
+      { zh: '药', py: 'yào', en: 'medicine' },
+    ],
+    lines: [
+      { zh: '今天我头疼，也发烧了。', py: 'Jīntiān wǒ tóu téng, yě fāshāo le.', en: 'Today I have a headache and a fever.' },
+      { zh: '我去医院看病。', py: 'Wǒ qù yīyuàn kànbìng.', en: 'I go to the hospital to see a doctor.' },
+      { zh: '我先挂号，然后等医生。', py: 'Wǒ xiān guà hào, ránhòu děng yīshēng.', en: 'First I register, then I wait for the doctor.' },
+      { zh: '医生问：“你哪里不舒服？”', py: 'Yīshēng wèn: “Nǐ nǎlǐ bù shūfu?”', en: 'The doctor asks, "What is wrong?"' },
+      { zh: '他说：“多休息，多喝水。”', py: 'Tā shuō: “Duō xiūxi, duō hē shuǐ.”', en: 'He says, "Rest more and drink plenty of water."' },
+      { zh: '我拿了药，回酒店休息。', py: 'Wǒ ná le yào, huí jiǔdiàn xiūxi.', en: 'I pick up the medicine and rest at the hotel.' },
+    ],
+    questions: [
+      { question: 'What does the traveller do first at the hospital?', options: ['Register', 'See the doctor', 'Take medicine'], answer: 0, explain: '先挂号.' },
+      { question: 'What does the doctor advise?', options: ['Rest and drink water', 'Eat more', 'Exercise'], answer: 0, explain: '多休息，多喝水.' },
+    ],
+  },
+
+  {
+    id: 'park-day',
+    title: 'A Day at the Park',
+    titleZh: '公园里的一天',
+    level: 'elementary',
+    minutes: 3,
+    summary: 'Two friends play on the slide, swing and share a ball.',
+    proTip: 'Notice 我们一起…吧, "let us … together". Kids use it all the time to invite a friend to play.',
+    focus: [
+      { py: 'gōngyuán', note: 'First tone, then rising: gōng yuán, like asking "what?" on the end.' },
+      { py: 'fēnxiǎng', note: 'High flat, then dip: fēn xiǎng.' },
+    ],
+    words: [
+      { zh: '公园', py: 'gōngyuán', en: 'park' },
+      { zh: '滑梯', py: 'huátī', en: 'slide' },
+      { zh: '秋千', py: 'qiūqiān', en: 'swing' },
+      { zh: '分享', py: 'fēnxiǎng', en: 'to share' },
+    ],
+    lines: [
+      { zh: '今天天气很好。', py: 'Jīntiān tiānqì hěn hǎo.', en: 'The weather is nice today.' },
+      { zh: '我和朋友去公园玩。', py: 'Wǒ hé péngyou qù gōngyuán wán.', en: 'My friend and I go to the park to play.' },
+      { zh: '我们一起玩滑梯吧！', py: 'Wǒmen yìqǐ wán huátī ba!', en: "Let's play on the slide together!" },
+      { zh: '然后我们玩秋千。', py: 'Ránhòu wǒmen wán qiūqiān.', en: 'Then we play on the swing.' },
+      { zh: '我有一个球。', py: 'Wǒ yǒu yí ge qiú.', en: 'I have a ball.' },
+      { zh: '我和朋友分享我的球。', py: 'Wǒ hé péngyou fēnxiǎng wǒ de qiú.', en: 'I share my ball with my friend.' },
+      { zh: '我们玩得很开心！', py: 'Wǒmen wán de hěn kāixīn!', en: 'We have so much fun!' },
+    ],
+    questions: [
+      { question: 'What do they play on first?', options: ['The slide', 'The swing', 'The ball'], answer: 0, explain: '玩滑梯 comes first.' },
+      { question: 'What does the child share?', options: ['A ball', 'A doll', 'Food'], answer: 0, explain: '分享我的球.' },
+    ],
+  },
 ];

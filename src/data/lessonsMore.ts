@@ -1215,7 +1215,29 @@ export const EXTRA: Record<string, Record<number, Block[]>> = {
       { type: 'remember', body: 'Learn the script as five steps: ask (您想点什么？), check spice (要辣的吗？), offer more (还要别的吗？), ask to wait (请稍等), serve (请慢用). Five lines for five moments, in the order they happen.' },
     ],
   },
+  parts: {
+    6: [
+      { type: 'speak', prompt: 'Say a word you can now build from parts.', hanzi: '好', pinyin: 'hǎo', english: 'good (女 + 子)' },
+      { type: 'speak', prompt: 'And one more.', hanzi: '明', pinyin: 'míng', english: 'bright (日 + 月)' },
+    ],
+  },
+  strokes: {
+    5: [
+      { type: 'speak', prompt: 'Say the name of a simple character as you picture writing it.', hanzi: '大', pinyin: 'dà', english: 'big (three strokes)' },
+      { type: 'speak', prompt: 'Now another.', hanzi: '十', pinyin: 'shí', english: 'ten (two strokes)' },
+    ],
+  },
+  radicals: {
+    5: [
+      { type: 'speak', prompt: 'Say two words that share the speech radical 讠.', hanzi: '说话', pinyin: 'shuō huà', english: 'to speak' },
+      { type: 'speak', prompt: 'And a word with the food radical 饣.', hanzi: '吃饭', pinyin: 'chī fàn', english: 'to eat a meal' },
+    ],
+  },
   sounds: {
+    3: [
+      { type: 'speak', prompt: 'Say a syllable and name its three parts.', hanzi: '妈', pinyin: 'mā', english: 'm + a + tone 1' },
+      { type: 'speak', prompt: 'One more.', hanzi: '好', pinyin: 'hǎo', english: 'h + ao + tone 3' },
+    ],
     0: [
       { type: 'pro', body: 'Use headphones for this course. Tone differences are subtle, and laptop speakers blur them.' },
       { type: 'remember', body: 'Close your eyes and listen first, then read the pinyin. If you read first, your English brain will fill in the wrong sounds.' },

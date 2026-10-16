@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { LESSONS, lessonWords } from '../data/lessons';
+import { WORD_BY_ID } from '../data/words';
 import { isDue, newCard, schedule, type CardState, type Rating } from './srs';
 import {
   EMPTY_STATS,
@@ -42,6 +43,7 @@ export interface Progress {
   streak: StreakState;
   badges: Record<string, number>;
   stats: Stats;
+  checkpoints: Record<string, { best: number; total: number; at: number }>;
   settings: Settings;
 }
 
@@ -56,6 +58,7 @@ const DEFAULTS: Progress = {
   streak: EMPTY_STREAK,
   badges: {},
   stats: EMPTY_STATS,
+  checkpoints: {},
   settings: {
     taglish: true,
     pinyin: 'always',
@@ -88,6 +91,7 @@ function load(): Progress {
       streak: { ...EMPTY_STREAK, ...(p.streak ?? {}) },
       badges: p.badges ?? {},
       stats: { ...EMPTY_STATS, ...(p.stats ?? {}) },
+      checkpoints: p.checkpoints ?? {},
       settings: { ...DEFAULTS.settings, ...(p.settings ?? {}) },
     };
   } catch {
@@ -118,6 +122,7 @@ const toGame = (p: Progress): GameState => ({
   completed: p.completed,
   stories: p.stories,
   deck: p.deck,
+  checkpoints: p.checkpoints,
   dailyGoal: p.settings.dailyGoal,
 });
 
@@ -132,6 +137,7 @@ interface Store {
   completeLesson: (id: string, quiz?: { firstTry: number; total: number }) => void;
   setResume: (id: string, page: number) => void;
   completeStory: (id: string) => void;
+  completeCheckpoint: (moduleId: string, score: number, total: number) => void;
   /** Record one tone-trainer answer. */
   soundAnswer: (correct: boolean) => void;
   review: (wordId: string, rating: Rating) => void;
@@ -243,6 +249,23 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     [commit],
   );
 
+  const completeCheckpoint = useCallback(
+    (moduleId: string, score: number, total: number) => {
+      const p = ref.current;
+      const prev = p.checkpoints[moduleId];
+      const better = !prev || score / Math.max(total, 1) > prev.best / Math.max(prev.total, 1);
+      const base: Progress = {
+        ...p,
+        checkpoints: { ...p.checkpoints, [moduleId]: better ? { best: score, total, at: Date.now() } : prev },
+        days: bumpDay(p.days),
+        log: bumpLog(p.log, 'review'),
+      };
+      const r = award(base, 10 + score * 2);
+      commit(r.p, r.events);
+    },
+    [commit],
+  );
+
   const soundAnswer = useCallback(
     (correct: boolean) => {
       const p = ref.current;
@@ -292,7 +315,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const clearEvents = useCallback(() => setEvents([]), []);
 
   const dueIds = useMemo(
-    () => Object.entries(progress.deck).filter(([, c]) => isDue(c)).map(([id]) => id),
+    () => Object.entries(progress.deck).filter(([id, c]) => WORD_BY_ID[id] && isDue(c)).map(([id]) => id),
     [progress.deck],
   );
 
@@ -306,6 +329,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     completeLesson,
     setResume,
     completeStory,
+    completeCheckpoint,
     soundAnswer,
     review,
     setSettings,

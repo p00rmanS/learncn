@@ -38,6 +38,7 @@ export interface GameState {
   completed: Record<string, number>;
   stories: Record<string, number>;
   deck: Record<string, unknown>;
+  checkpoints: Record<string, { best: number; total: number; at: number }>;
   dailyGoal: number;
 }
 
@@ -199,6 +200,9 @@ export interface Badge {
   earned: (g: GameState) => boolean;
 }
 
+export const PASS_MARK = 0.7;
+const passedCheckpoints = (g: GameState) => Object.values(g.checkpoints).filter((c) => c.total > 0 && c.best / c.total >= PASS_MARK).length;
+
 export const BADGES: Badge[] = [
   { id: 'first-lesson', seal: '始', name: 'First step', hint: 'Finish your first lesson', earned: (g) => Object.keys(g.completed).length >= 1 },
   { id: 'ten-lessons', seal: '十', name: 'Ten lessons', hint: 'Finish 10 lessons', earned: (g) => Object.keys(g.completed).length >= 10 },
@@ -213,6 +217,8 @@ export const BADGES: Badge[] = [
   { id: 'words-100', seal: '词', name: 'Word collector', hint: 'Learn 100 words', earned: (g) => Object.keys(g.deck).length >= 100 },
   { id: 'perfect', seal: '准', name: 'Spot on', hint: 'Answer every question right on the first try in a lesson', earned: (g) => g.stats.perfectLessons >= 1 },
   { id: 'good-ear', seal: '耳', name: 'Good ear', hint: 'Get 20 tone questions right in the Sound Lab', earned: (g) => g.stats.soundRight >= 20 },
+  { id: 'checkpoint-1', seal: '考', name: 'Passed a checkpoint', hint: 'Score 70% or more on a chapter checkpoint', earned: (g) => passedCheckpoints(g) >= 1 },
+  { id: 'checkpoint-3', seal: '优', name: 'Chapter champion', hint: 'Pass 3 chapter checkpoints', earned: (g) => passedCheckpoints(g) >= 3 },
   { id: 'reviewer', seal: '记', name: 'Memory keeper', hint: 'Review 50 cards', earned: (g) => g.stats.reviews >= 50 },
 ];
 

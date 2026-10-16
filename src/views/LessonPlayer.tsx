@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type TouchEvent } from 'react';
 import { getLesson, lessonWords, lessonsFor, lessonTrack } from '../data/lessons';
 import LessonBlocks from '../components/LessonBlocks';
 import Icon from '../components/Icon';
@@ -19,6 +19,7 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const [firstTry, setFirstTry] = useState<Record<string, boolean>>({});
   const [done, setDone] = useState(false);
   const [xpGain, setXpGain] = useState(0);
+  const [nudge, setNudge] = useState(0);
   const game = useGame();
   const quizTotal = Object.keys(firstTry).length;
   const quizFirst = Object.values(firstTry).filter(Boolean).length;
@@ -41,7 +42,11 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   const words = useMemo(() => (lesson ? lessonWords(lesson) : []), [lesson]);
 
   const goNext = useCallback(() => {
-    if (!lesson || !pageSolved) return;
+    if (!lesson) return;
+    if (!pageSolved) {
+      setNudge((n) => n + 1);
+      return;
+    }
     if (isLast) {
       setXpGain(lessonXp({ firstTry: quizFirst, total: quizTotal, alreadyDone: !!progress.completed[lesson.id] }));
       completeLesson(lesson.id, { firstTry: quizFirst, total: quizTotal });
@@ -57,9 +62,21 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
   // Keyboard: → or Enter continues, ← goes back, Esc closes.
   useEffect(() => {
     const on = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return; // leave browser shortcuts (Alt+Left = back) alone
       const el = e.target as HTMLElement | null;
-      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+      if (el && (el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.tagName === 'AUDIO' || el.isContentEditable)) return;
+      if (el?.tagName === 'INPUT' && (el as HTMLInputElement).type !== 'button') return; // typing, or a slider that uses the arrows
       if (done) return;
+      // 1 to 9 pick an answer in a quiz
+      if (/^[1-9]$/.test(e.key)) {
+        const options = document.querySelectorAll<HTMLButtonElement>('[aria-label="Answer choices"] button');
+        const target = options[Number(e.key) - 1];
+        if (target && !target.disabled) {
+          e.preventDefault();
+          target.click();
+        }
+        return;
+      }
       if (e.key === 'ArrowRight' || (e.key === 'Enter' && el?.tagName !== 'BUTTON' && el?.tagName !== 'A')) {
         e.preventDefault();
         goNext();
@@ -73,6 +90,24 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
     window.addEventListener('keydown', on);
     return () => window.removeEventListener('keydown', on);
   }, [goNext, goBack, done]);
+
+  // Swipe left for next, right for back (phones and tablets).
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: TouchEvent) => {
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: TouchEvent) => {
+    const start = touch.current;
+    touch.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) < 70 || Math.abs(dy) > 45) return; // a deliberate, mostly horizontal swipe
+    if (dx < 0) goNext();
+    else goBack();
+  };
 
   if (!lesson || !page) {
     return (
@@ -194,7 +229,7 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <div key={step} className="mx-auto w-full max-w-2xl px-5 pb-44 pt-8 rise sm:px-6 sm:pt-12" style={{ zoom: TEXT_SCALE[progress.settings.textSize] }}>
           <p className="eyebrow text-accent">
             <span className="mr-2 tabular-nums">{String(step + 1).padStart(2, '0')}</span>
@@ -213,7 +248,13 @@ export default function LessonPlayer({ lessonId }: { lessonId: string }) {
           <button type="button" onClick={goBack} disabled={step === 0} className="btn-ghost" title="Back (←)">
             <Icon name="back" size={18} /> Back
           </button>
-          <div className="flex-1 text-center text-[13px] text-muted">{!pageSolved && 'Answer to continue'}</div>
+          <div
+            key={nudge}
+            className={`flex-1 text-center text-[13px] ${!pageSolved && nudge > 0 ? 'nudge font-medium text-accent' : 'text-muted'}`}
+            aria-live="polite"
+          >
+            {!pageSolved ? 'Answer to continue' : <span className="hidden sm:inline">Use the ← → keys to move between pages</span>}
+          </div>
           {isLast ? (
             <button type="button" onClick={goNext} disabled={!pageSolved} className="btn-seal" title="Finish (→)">
               {alreadyDone ? 'Finish again' : 'Finish lesson'} <Icon name="check" size={18} />

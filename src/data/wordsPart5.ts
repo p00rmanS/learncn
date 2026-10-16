@@ -25,7 +25,7 @@ export const W5 = {
   duo: w({ id: 'duo', hanzi: '多', pinyin: 'duō', english: 'many; more', tones: [1] }),
   chisu: w({ id: 'chisu', hanzi: '吃素', pinyin: 'chī sù', english: 'to be vegetarian', tones: [1, 4] }),
   haixian: w({ id: 'haixian', hanzi: '海鲜', pinyin: 'hǎixiān', english: 'seafood', tones: [3, 1] }),
-  huasheng: w({ id: 'huasheng', hanzi: '花生', pinyin: 'huāshēng', english: 'peanut', tones: [1, 0] }),
+  huasheng: w({ id: 'huasheng', hanzi: '花生', pinyin: 'huāshēng', english: 'peanut', tones: [1, 1] }),
   jidan: w({ id: 'jidan', hanzi: '鸡蛋', pinyin: 'jīdàn', english: 'egg', tones: [1, 4] }),
   niunai: w({ id: 'niunai', hanzi: '牛奶', pinyin: 'niúnǎi', english: 'milk', tones: [2, 3] }),
   guomin: w({ id: 'guomin', hanzi: '过敏', pinyin: 'guòmǐn', english: 'allergic; allergy', tones: [4, 3] }),

@@ -68,7 +68,7 @@ export const PART9_LESSONS: Lesson[] = [
             title: 'On the platform',
             lines: [
               { speaker: 'A', hanzi: '请问，去机场坐几号线？', pinyin: 'Qǐngwèn, qù jīchǎng zuò jǐ hào xiàn?', english: 'Excuse me, which line goes to the airport?' },
-              { speaker: 'B', hanzi: '你坐十号线，在三元桥换乘机场线。', pinyin: 'Nǐ zuò shí hào xiàn, zài Sānyuánqiáo huàn jīchǎng xiàn.', english: 'Take Line 10, then transfer to the airport line at Sanyuanqiao.' },
+              { speaker: 'B', hanzi: '你坐十号线，在三元桥换乘机场线。', pinyin: 'Nǐ zuò shí hào xiàn, zài Sānyuánqiáo huànchéng jīchǎng xiàn.', english: 'Take Line 10, then transfer to the airport line at Sanyuanqiao.' },
               { speaker: 'A', hanzi: '谢谢！下一站是哪里？', pinyin: 'Xièxie! Xià yí zhàn shì nǎlǐ?', english: 'Thanks! Where is the next stop?' },
               { speaker: 'B', hanzi: '下一站是三元桥。', pinyin: 'Xià yí zhàn shì Sānyuánqiáo.', english: 'The next stop is Sanyuanqiao.' },
             ],

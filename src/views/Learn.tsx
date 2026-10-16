@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { MODULES, lessonWords, lessonsFor, moduleTrack, type Track } from '../data/lessons';
 import Icon from '../components/Icon';
+import Seal from '../components/Seal';
 import { href } from '../lib/router';
 import { useStore } from '../lib/store';
 
@@ -115,7 +116,8 @@ export default function Learn() {
               </span>
             </button>
             {expanded && (
-              <ol className="rise">
+              <div className="rise">
+              <ol>
                 {visible.map((l) => {
                   const isDone = !!progress.completed[l.id];
                   const isNext = nextLessonId === l.id;
@@ -151,6 +153,21 @@ export default function Learn() {
                   );
                 })}
               </ol>
+              {done >= 2 && (
+                <a href={href.checkpoint(m.id)} className="group -mx-3 mt-2 flex items-center gap-4 rounded-xl px-3 py-5 transition-colors hover:bg-surface">
+                  <Seal char="考" size={40} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-[20px] font-medium leading-snug">Chapter checkpoint</span>
+                    <span className="block text-[14px] text-muted">
+                      {progress.checkpoints[m.id]
+                        ? `Best: ${progress.checkpoints[m.id].best} of ${progress.checkpoints[m.id].total} right first time`
+                        : 'Ten questions from the lessons you finished. Earn XP and a badge.'}
+                    </span>
+                  </span>
+                  <Icon name="arrow" size={18} className="shrink-0 text-muted transition-transform group-hover:translate-x-1" />
+                </a>
+              )}
+              </div>
             )}
           </section>
         );

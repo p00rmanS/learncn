@@ -30,7 +30,7 @@ export default function Review() {
 
   const start = (all: boolean) => {
     setPractice(all);
-    setQueue(all ? Object.keys(progress.deck) : [...dueIds]);
+    setQueue((all ? Object.keys(progress.deck) : [...dueIds]).filter((id) => WORD_BY_ID[id]));
     setCount(0);
     setTally({ again: 0, hard: 0, good: 0, easy: 0 });
     setRevealed(false);
