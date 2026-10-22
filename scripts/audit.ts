@@ -100,6 +100,7 @@ for (const l of LESSONS) {
       }
     });
   });
+  if (!types.has('taglish')) err(lw, 'no Taglish explanation');
   if (!types.has('pro')) err(lw, 'no pro tip');
   if (!types.has('remember')) err(lw, 'no "how to remember"');
   if (!types.has('quiz')) err(lw, 'no quiz');
