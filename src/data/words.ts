@@ -9,6 +9,7 @@ import { W8 } from './wordsKids';
 import { W9 } from './wordsPart9';
 import { W10 } from './wordsPart10';
 import { W11 } from './wordsPart11';
+import { W12 } from './wordsPart12';
 
 const w = (x: Word): Word => x;
 
@@ -81,5 +82,5 @@ export const W = {
   cha: w({ id: 'cha', hanzi: '茶', pinyin: 'chá', english: 'tea', tones: [2] }),
 } satisfies Record<string, Word>;
 
-export const ALL_WORDS: Word[] = [...Object.values(W), ...Object.values(W2), ...Object.values(W3), ...Object.values(W4), ...Object.values(W5), ...Object.values(W6), ...Object.values(W7), ...Object.values(W8), ...Object.values(W9), ...Object.values(W10), ...Object.values(W11)];
+export const ALL_WORDS: Word[] = [...Object.values(W), ...Object.values(W2), ...Object.values(W3), ...Object.values(W4), ...Object.values(W5), ...Object.values(W6), ...Object.values(W7), ...Object.values(W8), ...Object.values(W9), ...Object.values(W10), ...Object.values(W11), ...Object.values(W12)];
 export const WORD_BY_ID: Record<string, Word> = Object.fromEntries(ALL_WORDS.map((x) => [x.id, x]));
