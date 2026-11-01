@@ -12,6 +12,7 @@ import { PART9_LESSONS } from './lessonsPart9';
 import { PART10_LESSONS } from './lessonsPart10';
 import { PART11_LESSONS } from './lessonsPart11';
 import { PART12_LESSONS } from './lessonsPart12';
+import { PART13_LESSONS } from './lessonsPart13';
 import { TAGLISH_NOTES } from './taglishNotes';
 
 export const MODULES = [
@@ -1047,7 +1048,7 @@ function inTeachingOrder(list: Lesson[]): Lesson[] {
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-const SORTED_LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS, ...PART10_LESSONS, ...PART11_LESSONS, ...PART12_LESSONS]
+const SORTED_LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS, ...PART10_LESSONS, ...PART11_LESSONS, ...PART12_LESSONS, ...PART13_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
