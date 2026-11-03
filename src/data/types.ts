@@ -50,7 +50,7 @@ export interface Page {
 
 export interface Lesson {
   id: string;
-  module: 'sound' | 'convo' | 'hanzi' | 'patterns' | 'daily' | 'talk' | 'food' | 'work' | 'kinder' | 'elementary';
+  module: 'sound' | 'foundations' | 'convo' | 'hanzi' | 'patterns' | 'daily' | 'talk' | 'food' | 'work' | 'kinder' | 'elementary';
   /** Which learner this lesson is for. Defaults to adult. */
   track?: 'adult' | 'kids';
   title: string;

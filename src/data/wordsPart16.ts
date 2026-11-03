@@ -1,0 +1,118 @@
+import type { Word } from './types';
+
+const w = (x: Word): Word => x;
+
+/** Foundations: the everyday basics kids learn first. Body, clock, directions, fruit, vegetables, meals, animals, subjects and rooms. */
+export const W16 = {
+  // ── Body ──
+  tou: w({ id: 'p16-tou', hanzi: '头', pinyin: 'tóu', english: 'head', tones: [2] }),
+  yanjing: w({ id: 'p16-yanjing', hanzi: '眼睛', pinyin: 'yǎnjing', english: 'eye(s)', tones: [3, 0] }),
+  erduo: w({ id: 'p16-erduo', hanzi: '耳朵', pinyin: 'ěrduo', english: 'ear(s)', tones: [3, 0] }),
+  bizi: w({ id: 'p16-bizi', hanzi: '鼻子', pinyin: 'bízi', english: 'nose', tones: [2, 0] }),
+  zui: w({ id: 'p16-zui', hanzi: '嘴', pinyin: 'zuǐ', english: 'mouth', tones: [3] }),
+  shou: w({ id: 'p16-shou', hanzi: '手', pinyin: 'shǒu', english: 'hand', tones: [3] }),
+  shouzhi: w({ id: 'p16-shouzhi', hanzi: '手指', pinyin: 'shǒuzhǐ', english: 'finger', tones: [3, 3] }),
+  jiao: w({ id: 'p16-jiao', hanzi: '脚', pinyin: 'jiǎo', english: 'foot; leg below the knee', tones: [3] }),
+  tui: w({ id: 'p16-tui', hanzi: '腿', pinyin: 'tuǐ', english: 'leg', tones: [3] }),
+  toufa: w({ id: 'p16-toufa', hanzi: '头发', pinyin: 'tóufa', english: 'hair', tones: [2, 0] }),
+  duzi: w({ id: 'p16-duzi', hanzi: '肚子', pinyin: 'dùzi', english: 'belly; stomach', tones: [4, 0] }),
+  bozi: w({ id: 'p16-bozi', hanzi: '脖子', pinyin: 'bózi', english: 'neck', tones: [2, 0] }),
+  jianbang: w({ id: 'p16-jianbang', hanzi: '肩膀', pinyin: 'jiānbǎng', english: 'shoulder', tones: [1, 3] }),
+
+  // ── Clock and time ──
+  dian: w({ id: 'p16-dian', hanzi: '点', pinyin: 'diǎn', english: "o'clock (hour)", tones: [3] }),
+  fen: w({ id: 'p16-fen', hanzi: '分', pinyin: 'fēn', english: 'minute', tones: [1] }),
+  ban: w({ id: 'p16-ban', hanzi: '半', pinyin: 'bàn', english: 'half', tones: [4] }),
+  ke: w({ id: 'p16-ke', hanzi: '刻', pinyin: 'kè', english: 'quarter (of an hour)', tones: [4] }),
+  xianzai: w({ id: 'p16-xianzai', hanzi: '现在', pinyin: 'xiànzài', english: 'now', tones: [4, 4] }),
+  ji: w({ id: 'p16-ji', hanzi: '几', pinyin: 'jǐ', english: 'how many; what (number)', tones: [3] }),
+  zaoshang: w({ id: 'p16-zaoshang', hanzi: '早上', pinyin: 'zǎoshang', english: 'morning', tones: [3, 0] }),
+  xiawu: w({ id: 'p16-xiawu', hanzi: '下午', pinyin: 'xiàwǔ', english: 'afternoon', tones: [4, 3] }),
+  wanshang: w({ id: 'p16-wanshang', hanzi: '晚上', pinyin: 'wǎnshang', english: 'evening; night', tones: [3, 0] }),
+  shijian: w({ id: 'p16-shijian', hanzi: '时间', pinyin: 'shíjiān', english: 'time', tones: [2, 1] }),
+
+  // ── Directions ──
+  dong: w({ id: 'p16-dong', hanzi: '东', pinyin: 'dōng', english: 'east', tones: [1] }),
+  nan: w({ id: 'p16-nan', hanzi: '南', pinyin: 'nán', english: 'south', tones: [2] }),
+  xi: w({ id: 'p16-xi', hanzi: '西', pinyin: 'xī', english: 'west', tones: [1] }),
+  bei: w({ id: 'p16-bei', hanzi: '北', pinyin: 'běi', english: 'north', tones: [3] }),
+  zuo: w({ id: 'p16-zuo', hanzi: '左', pinyin: 'zuǒ', english: 'left', tones: [3] }),
+  you: w({ id: 'p16-you', hanzi: '右', pinyin: 'yòu', english: 'right', tones: [4] }),
+  qian: w({ id: 'p16-qian', hanzi: '前', pinyin: 'qián', english: 'front; in front of', tones: [2] }),
+  hou: w({ id: 'p16-hou', hanzi: '后', pinyin: 'hòu', english: 'back; behind', tones: [4] }),
+  shang: w({ id: 'p16-shang', hanzi: '上', pinyin: 'shàng', english: 'up; on top of', tones: [4] }),
+  xia: w({ id: 'p16-xia', hanzi: '下', pinyin: 'xià', english: 'down; under', tones: [4] }),
+  lili: w({ id: 'p16-lili', hanzi: '里', pinyin: 'lǐ', english: 'inside', tones: [3] }),
+  wai: w({ id: 'p16-wai', hanzi: '外', pinyin: 'wài', english: 'outside', tones: [4] }),
+  duimian: w({ id: 'p16-duimian', hanzi: '对面', pinyin: 'duìmiàn', english: 'opposite; across from', tones: [4, 4] }),
+  pangbian: w({ id: 'p16-pangbian', hanzi: '旁边', pinyin: 'pángbiān', english: 'beside; next to', tones: [2, 1] }),
+  yinhang: w({ id: 'p16-yinhang', hanzi: '银行', pinyin: 'yínháng', english: 'bank', tones: [2, 2] }),
+  xuexiao: w({ id: 'p16-xuexiao', hanzi: '学校', pinyin: 'xuéxiào', english: 'school', tones: [2, 4] }),
+
+  // ── Fruit ──
+  shuiguo: w({ id: 'p16-shuiguo', hanzi: '水果', pinyin: 'shuǐguǒ', english: 'fruit', tones: [3, 3] }),
+  pingguo: w({ id: 'p16-pingguo', hanzi: '苹果', pinyin: 'píngguǒ', english: 'apple', tones: [2, 3] }),
+  xiangjiao: w({ id: 'p16-xiangjiao', hanzi: '香蕉', pinyin: 'xiāngjiāo', english: 'banana', tones: [1, 1] }),
+  juzi: w({ id: 'p16-juzi', hanzi: '橘子', pinyin: 'júzi', english: 'orange; tangerine', tones: [2, 0] }),
+  putao: w({ id: 'p16-putao', hanzi: '葡萄', pinyin: 'pútao', english: 'grape', tones: [2, 0] }),
+  xigua: w({ id: 'p16-xigua', hanzi: '西瓜', pinyin: 'xīguā', english: 'watermelon', tones: [1, 1] }),
+  caomei: w({ id: 'p16-caomei', hanzi: '草莓', pinyin: 'cǎoméi', english: 'strawberry', tones: [3, 2] }),
+  taozi: w({ id: 'p16-taozi', hanzi: '桃子', pinyin: 'táozi', english: 'peach', tones: [2, 0] }),
+  mangguo: w({ id: 'p16-mangguo', hanzi: '芒果', pinyin: 'mángguǒ', english: 'mango', tones: [2, 3] }),
+  li2: w({ id: 'p16-li2', hanzi: '梨', pinyin: 'lí', english: 'pear', tones: [2] }),
+
+  // ── Vegetables ──
+  shucai: w({ id: 'p16-shucai', hanzi: '蔬菜', pinyin: 'shūcài', english: 'vegetables', tones: [1, 4] }),
+  baicai: w({ id: 'p16-baicai', hanzi: '白菜', pinyin: 'báicài', english: 'Chinese cabbage', tones: [2, 4] }),
+  huluobo: w({ id: 'p16-huluobo', hanzi: '胡萝卜', pinyin: 'húluóbo', english: 'carrot', tones: [2, 2, 0] }),
+  tudou: w({ id: 'p16-tudou', hanzi: '土豆', pinyin: 'tǔdòu', english: 'potato', tones: [3, 4] }),
+  xihongshi: w({ id: 'p16-xihongshi', hanzi: '西红柿', pinyin: 'xīhóngshì', english: 'tomato', tones: [1, 2, 4] }),
+  huanggua: w({ id: 'p16-huanggua', hanzi: '黄瓜', pinyin: 'huángguā', english: 'cucumber', tones: [2, 1] }),
+  qiezi: w({ id: 'p16-qiezi', hanzi: '茄子', pinyin: 'qiézi', english: 'eggplant; aubergine', tones: [2, 0] }),
+  qingcai: w({ id: 'p16-qingcai', hanzi: '青菜', pinyin: 'qīngcài', english: 'green vegetables', tones: [1, 4] }),
+  yumi: w({ id: 'p16-yumi', hanzi: '玉米', pinyin: 'yùmǐ', english: 'corn; maize', tones: [4, 3] }),
+
+  // ── Meals and food ──
+  zaofan: w({ id: 'p16-zaofan', hanzi: '早饭', pinyin: 'zǎofàn', english: 'breakfast', tones: [3, 4] }),
+  wufan: w({ id: 'p16-wufan', hanzi: '午饭', pinyin: 'wǔfàn', english: 'lunch', tones: [3, 4] }),
+  wanfan: w({ id: 'p16-wanfan', hanzi: '晚饭', pinyin: 'wǎnfàn', english: 'dinner', tones: [3, 4] }),
+  jidan: w({ id: 'p16-jidan', hanzi: '鸡蛋', pinyin: 'jīdàn', english: 'egg', tones: [1, 4] }),
+  niunai: w({ id: 'p16-niunai', hanzi: '牛奶', pinyin: 'niúnǎi', english: 'milk', tones: [2, 3] }),
+  miantiao: w({ id: 'p16-miantiao', hanzi: '面条', pinyin: 'miàntiáo', english: 'noodles', tones: [4, 2] }),
+  jiaozi: w({ id: 'p16-jiaozi', hanzi: '饺子', pinyin: 'jiǎozi', english: 'dumplings', tones: [3, 0] }),
+  yu: w({ id: 'p16-yu', hanzi: '鱼', pinyin: 'yú', english: 'fish', tones: [2] }),
+  jirou: w({ id: 'p16-jirou', hanzi: '鸡肉', pinyin: 'jīròu', english: 'chicken (meat)', tones: [1, 4] }),
+  zhurou: w({ id: 'p16-zhurou', hanzi: '猪肉', pinyin: 'zhūròu', english: 'pork', tones: [1, 4] }),
+  cha: w({ id: 'p16-cha', hanzi: '茶', pinyin: 'chá', english: 'tea', tones: [2] }),
+  kafei: w({ id: 'p16-kafei', hanzi: '咖啡', pinyin: 'kāfēi', english: 'coffee', tones: [1, 1] }),
+
+  // ── Animals ──
+  dongwu: w({ id: 'p16-dongwu', hanzi: '动物', pinyin: 'dòngwù', english: 'animal', tones: [4, 4] }),
+  gou: w({ id: 'p16-gou', hanzi: '狗', pinyin: 'gǒu', english: 'dog', tones: [3] }),
+  mao: w({ id: 'p16-mao', hanzi: '猫', pinyin: 'māo', english: 'cat', tones: [1] }),
+  zhu: w({ id: 'p16-zhu', hanzi: '猪', pinyin: 'zhū', english: 'pig', tones: [1] }),
+  niu: w({ id: 'p16-niu', hanzi: '牛', pinyin: 'niú', english: 'cow; ox', tones: [2] }),
+  yang: w({ id: 'p16-yang', hanzi: '羊', pinyin: 'yáng', english: 'sheep; goat', tones: [2] }),
+  jichicken: w({ id: 'p16-ji2', hanzi: '鸡', pinyin: 'jī', english: 'chicken', tones: [1] }),
+  ya: w({ id: 'p16-ya', hanzi: '鸭', pinyin: 'yā', english: 'duck', tones: [1] }),
+  hu: w({ id: 'p16-hu', hanzi: '虎', pinyin: 'hǔ', english: 'tiger', tones: [3] }),
+  xiong: w({ id: 'p16-xiong', hanzi: '熊', pinyin: 'xióng', english: 'bear', tones: [2] }),
+  ma: w({ id: 'p16-ma', hanzi: '马', pinyin: 'mǎ', english: 'horse', tones: [3] }),
+  niao: w({ id: 'p16-niao', hanzi: '鸟', pinyin: 'niǎo', english: 'bird', tones: [3] }),
+  xiao: w({ id: 'p16-xiao', hanzi: '小', pinyin: 'xiǎo', english: 'small; little', tones: [3] }),
+
+  // ── School subjects and rooms ──
+  jiaoshi: w({ id: 'p16-jiaoshi', hanzi: '教室', pinyin: 'jiàoshì', english: 'classroom', tones: [4, 4] }),
+  shuxue: w({ id: 'p16-shuxue', hanzi: '数学', pinyin: 'shùxué', english: 'maths', tones: [4, 2] }),
+  yuwen: w({ id: 'p16-yuwen', hanzi: '语文', pinyin: 'yǔwén', english: 'Chinese language (subject)', tones: [3, 2] }),
+  yingyu: w({ id: 'p16-yingyu', hanzi: '英语', pinyin: 'yīngyǔ', english: 'English (language)', tones: [1, 3] }),
+  tiyu: w({ id: 'p16-tiyu', hanzi: '体育', pinyin: 'tǐyù', english: 'physical education; sport', tones: [3, 4] }),
+  meishu: w({ id: 'p16-meishu', hanzi: '美术', pinyin: 'měishù', english: 'art', tones: [3, 4] }),
+  lishi: w({ id: 'p16-lishi', hanzi: '历史', pinyin: 'lìshǐ', english: 'history', tones: [4, 3] }),
+  shangke: w({ id: 'p16-shangke', hanzi: '上课', pinyin: 'shàngkè', english: 'to attend class', tones: [4, 4] }),
+  fangjian: w({ id: 'p16-fangjian', hanzi: '房间', pinyin: 'fángjiān', english: 'room', tones: [2, 1] }),
+  chufang: w({ id: 'p16-chufang', hanzi: '厨房', pinyin: 'chúfáng', english: 'kitchen', tones: [2, 2] }),
+  keting: w({ id: 'p16-keting', hanzi: '客厅', pinyin: 'kètīng', english: 'living room', tones: [4, 1] }),
+  weishengjian: w({ id: 'p16-weishengjian', hanzi: '卫生间', pinyin: 'wèishēngjiān', english: 'bathroom; toilet', tones: [4, 1, 1] }),
+  woshi: w({ id: 'p16-woshi', hanzi: '卧室', pinyin: 'wòshì', english: 'bedroom', tones: [4, 4] }),
+};
