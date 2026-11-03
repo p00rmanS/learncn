@@ -15,6 +15,7 @@ import { PART12_LESSONS } from './lessonsPart12';
 import { PART13_LESSONS } from './lessonsPart13';
 import { PART14_LESSONS } from './lessonsPart14';
 import { PART15_LESSONS } from './lessonsPart15';
+import { PART16_LESSONS } from './lessonsPart16';
 import { TAGLISH_NOTES } from './taglishNotes';
 
 export const MODULES = [
@@ -1055,7 +1056,7 @@ function inTeachingOrder(list: Lesson[]): Lesson[] {
 const moduleOrder = (l: Lesson) => MODULES.findIndex((m) => m.id === l.module);
 
 /** All lessons in learning order, with extra tips merged into the base lessons. */
-const SORTED_LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS, ...PART10_LESSONS, ...PART11_LESSONS, ...PART12_LESSONS, ...PART13_LESSONS, ...PART14_LESSONS, ...PART15_LESSONS]
+const SORTED_LESSONS: Lesson[] = [...BASE_LESSONS, ...MORE_LESSONS, ...PART3_LESSONS, ...PART4_LESSONS, ...PART5_LESSONS, ...PART6_LESSONS, ...PART7_LESSONS, ...KIDS_LESSONS, ...PART8_LESSONS, ...PART9_LESSONS, ...PART10_LESSONS, ...PART11_LESSONS, ...PART12_LESSONS, ...PART13_LESSONS, ...PART14_LESSONS, ...PART15_LESSONS, ...PART16_LESSONS]
   .map((l) => {
     const extra = EXTRA[l.id];
     if (!extra) return l;
