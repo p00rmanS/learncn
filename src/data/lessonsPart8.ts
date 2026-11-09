@@ -52,6 +52,11 @@ export const PART8_LESSONS: Lesson[] = [
             body: 'Frequency words go before the verb, right after the subject, like time words: 我常常喝咖啡. Use 从来不 for a lifelong habit of "never", and 没…过 for "have not yet ever": 我没去过 vs 我从来不去.',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not put the frequency word after the verb. 我喝常常咖啡 is wrong. 我常常喝咖啡 is right.',
+          },
+          {
             type: 'remember',
             body: 'Put them on a ladder from high to low: 总是 (100%), 常常 (75%), 有时候 (40%), 很少 (10%), 从来不 (0%). Say them in order, going down the ladder.',
           },

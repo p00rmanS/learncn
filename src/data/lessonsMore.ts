@@ -284,6 +284,11 @@ export const MORE_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Even if you plan to only type, write each new character a few times with pen and paper. Your hand remembers the shape better than your eyes do.',
           },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not write strokes in a random order. Most characters go top before bottom and left before right, so follow the stroke order in the chart, not what feels natural.',
+          },
         ],
       },
       {
@@ -1289,6 +1294,7 @@ export const EXTRA: Record<string, Record<number, Block[]>> = {
   intro: {
     1: [
       { type: 'pro', body: 'In Chinese names, the family name comes first: 李明 Lǐ Míng is Mr. Li, with the given name Ming. Introduce yourself with your own order, but expect this order when you meet people.' },
+      { type: 'tip', label: 'Common mistake', body: 'Do not mix the two frames. 我叫 gives your name, and 我是 gives who you are, as in 我是学生. Saying 我是叫 is the most common slip.' },
       { type: 'remember', body: 'Think of 是 as an equals sign: 我 = 学生. It joins two nouns, and unlike English, it never changes form.' },
     ],
   },

@@ -36,6 +36,11 @@ export const PART6_LESSONS: Lesson[] = [
             body: 'Do not use 很 with 比. Say 我比你高, never 我比你很高. For "a little" or "a lot", add the amount after the adjective: 高一点 or 高很多.',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not put 比 and 没有 in one sentence. Say 我没有你高 (I am not as tall as you), not 我没有比你高.',
+          },
+          {
             type: 'taglish',
             body: 'Madali ito: A 比 B + adjective ay "mas ___ si A kaysa kay B". Ang 比 ay ang "kaysa". Dagdagan lang ng 一点 para sa "medyo".',
           },
@@ -167,6 +172,11 @@ export const PART6_LESSONS: Lesson[] = [
             body: '了 says an action finished (我吃了, "I ate"). 过 says you have that experience at some point in life (我吃过, "I have eaten it before"). If you could add "ever" in English, use 过.',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not forget 没 in the negative. The negative of 过 is 没…过, as in 我没去过, not 我不去过.',
+          },
+          {
             type: 'dialogue',
             title: 'Travel talk',
             lines: [
@@ -244,6 +254,11 @@ export const PART6_LESSONS: Lesson[] = [
           {
             type: 'pro',
             body: 'Unlike English, Chinese often uses both halves: 因为…所以…. You can drop one, especially in speech, but using both is always correct and clear. Same with 如果…就….',
+          },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not start the reason with 所以. 所以 sits in the result half, after the reason: 因为下雨，所以我不去.',
           },
         ],
       },
@@ -344,6 +359,11 @@ export const PART6_LESSONS: Lesson[] = [
           {
             type: 'pro',
             body: 'All these words go before the verb, right after the subject. 我已经吃了, 我刚到, 我正在吃. Same rule as 也 and 都.',
+          },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not place 已经 after the verb. 我吃已经了 is wrong. 已经 goes before the verb and 了 goes after it.',
           },
           {
             type: 'taglish',
