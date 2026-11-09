@@ -47,7 +47,7 @@ function Welcome() {
         <h1 className="mt-6 text-[46px] leading-[1.02] sm:text-[68px]">
           Who is learning
           <br />
-          <em className="font-medium italic text-accent">today?</em>
+          <em className="font-bold not-italic text-accent">today?</em>
         </h1>
         <p className="mt-6 max-w-lg text-[18px] leading-relaxed text-muted">
           Pick a path. You can switch any time in Learn or Settings, and your progress is kept for each.
@@ -61,8 +61,8 @@ function Welcome() {
           className="rise group rounded-[24px] border border-line bg-surface p-7 text-left transition-colors hover:border-ink sm:p-9"
           style={{ ['--i' as string]: 2 }}
         >
-          <span className="hanzi text-[64px] font-bold leading-none">学</span>
-          <span className="mt-6 block font-display text-[28px] font-medium leading-tight">Adults and teens</span>
+          <span className="flex aspect-[16/9] items-center justify-center rounded-2xl bg-accent-soft hanzi text-[104px] font-bold leading-none text-accent">学</span>
+          <span className="mt-6 block text-[26px] font-bold leading-tight">Adults and teens</span>
           <span className="mt-2 block text-[15px] leading-relaxed text-muted">
             Sound first, then real conversations: greetings, food, shopping, travel, work.
           </span>
@@ -76,8 +76,8 @@ function Welcome() {
           className="rise group rounded-[24px] border border-line bg-surface p-7 text-left transition-colors hover:border-ink sm:p-9"
           style={{ ['--i' as string]: 3 }}
         >
-          <span className="hanzi text-[64px] font-bold leading-none">玩</span>
-          <span className="mt-6 block font-display text-[28px] font-medium leading-tight">Little learners</span>
+          <span className="flex aspect-[16/9] items-center justify-center rounded-2xl bg-accent-soft hanzi text-[104px] font-bold leading-none text-accent">玩</span>
+          <span className="mt-6 block text-[26px] font-bold leading-tight">Little learners</span>
           <span className="mt-2 block text-[15px] leading-relaxed text-muted">
             For ages 3 to 10: songs, animals, games and actions, with tips for the grown-up.
           </span>
@@ -136,20 +136,20 @@ export default function Home() {
                 <>
                   Let&apos;s play
                   <br />
-                  with <em className="font-medium italic text-accent">Chinese.</em>
+                  with <em className="font-bold not-italic text-accent">Chinese.</em>
                 </>
               ) : (
                 <>
                   Start with
                   <br />
-                  the <em className="font-medium italic text-accent">sound.</em>
+                  the <em className="font-bold not-italic text-accent">sound.</em>
                 </>
               )
             ) : (
               <>
                 Welcome
                 <br />
-                <em className="font-medium italic text-accent">back.</em>
+                <em className="font-bold not-italic text-accent">back.</em>
               </>
             )}
           </h1>

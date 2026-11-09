@@ -1,83 +1,70 @@
 @import './fonts.css';
 
-/* Fraunces for plain Latin text only. Any glyph with a tone mark (ā, ǎ, ǜ…) falls back to Inter,
-   which draws the marks correctly. */
-@font-face {
-  font-family: 'Fraunces Display';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url(../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2) format('woff2-variations');
-  unicode-range: U+0020-007E, U+2013-2014, U+2018-201D, U+2026;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ───────── Design tokens: "ink and paper", one vermilion seal accent ───────── */
 :root {
-  --paper: 245 240 230;
-  --surface: 251 248 241;
-  --sunken: 235 229 216;
-  --ink: 27 25 22;
-  --muted: 108 101 91;
-  --line: 215 207 191;
-  --accent: 188 52 34;
-  --accent-ink: 255 250 242;
-  --accent-soft: 245 227 219;
-  --good: 46 98 76;
-  --good-soft: 225 237 228;
-  --bad: 140 48 38;
-  --bad-soft: 243 225 219;
-  --note: 126 88 26;
-  --note-soft: 243 233 210;
-  --grain-blend: multiply;
-  --grain-opacity: 0.5;
+  --paper: 245 245 243;
+  --surface: 255 255 255;
+  --sunken: 236 236 233;
+  --ink: 17 17 19;
+  --muted: 98 98 106;
+  --line: 224 224 220;
+  --accent: 14 122 106;
+  --accent-ink: 255 255 255;
+  --accent-soft: 218 240 235;
+  --good: 22 128 72;
+  --good-soft: 220 242 228;
+  --bad: 190 48 48;
+  --bad-soft: 252 229 227;
+  --note: 150 96 12;
+  --note-soft: 252 240 214;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --paper: 20 19 16;
-    --surface: 28 27 23;
-    --sunken: 38 36 31;
-    --ink: 241 235 222;
-    --muted: 161 154 141;
-    --line: 58 55 48;
-    --accent: 226 89 64;
-    --accent-ink: 30 12 8;
-    --accent-soft: 54 31 26;
-    --good: 126 192 152;
-    --good-soft: 28 46 36;
-    --bad: 234 130 114;
-    --bad-soft: 60 32 28;
-    --note: 224 178 106;
-    --note-soft: 54 44 27;
-    --grain-blend: screen;
-    --grain-opacity: 0.22;
+  :root:not([data-theme="light"]) {
+    --paper: 15 15 16;
+    --surface: 24 24 27;
+    --sunken: 33 33 37;
+    --ink: 242 242 244;
+    --muted: 160 160 170;
+    --line: 42 42 47;
+    --accent: 61 214 176;
+    --accent-ink: 4 30 24;
+    --accent-soft: 20 52 45;
+    --good: 110 220 150;
+    --good-soft: 22 46 32;
+    --bad: 255 130 120;
+    --bad-soft: 56 26 24;
+    --note: 240 190 100;
+    --note-soft: 52 40 20;
     color-scheme: dark;
   }
 }
+:root[data-theme="dark"] {
+  --paper: 15 15 16;
+  --surface: 24 24 27;
+  --sunken: 33 33 37;
+  --ink: 242 242 244;
+  --muted: 160 160 170;
+  --line: 42 42 47;
+  --accent: 61 214 176;
+  --accent-ink: 4 30 24;
+  --accent-soft: 20 52 45;
+  --good: 110 220 150;
+  --good-soft: 22 46 32;
+  --bad: 255 130 120;
+  --bad-soft: 56 26 24;
+  --note: 240 190 100;
+  --note-soft: 52 40 20;
+  color-scheme: dark;
+}
 
-/* Little learners get a sunnier, rounder look. Same system, warmer values. */
-:root[data-track='kids'] {
-  --paper: 252 244 224;
-  --surface: 255 250 236;
-  --sunken: 246 234 202;
-  --line: 227 212 176;
-  --accent-soft: 252 229 196;
-}
-:root[data-track='kids'] .card { border-radius: 22px; }
-:root[data-track='kids'] .btn { min-height: 54px; }
-@media (prefers-color-scheme: dark) {
-  :root[data-track='kids'] {
-    --paper: 26 22 16;
-    --surface: 36 31 22;
-    --sunken: 46 40 28;
-    --line: 70 62 44;
-    --accent-soft: 62 38 26;
-  }
-}
+/* Kids get bigger targets and rounder cards. Same colours as everyone else. */
+:root[data-track="kids"] .card { border-radius: 20px; }
+:root[data-track="kids"] .btn { min-height: 54px; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -91,24 +78,11 @@ body {
   line-height: 1.6;
 }
 
-/* Paper grain: a faint, static texture so flat colour never feels digital */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  opacity: var(--grain-opacity);
-  mix-blend-mode: var(--grain-blend);
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .4  0 0 0 0 .32  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
 h1, h2, h3 {
-  font-family: 'Fraunces Display', 'Inter Variable', 'Noto Serif SC', Georgia, serif;
-  font-variation-settings: 'opsz' 96;
-  letter-spacing: -0.015em;
-  line-height: 1.12;
-  font-weight: 600;
+  font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-weight: 700;
 }
 
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -135,7 +109,7 @@ button:disabled { cursor: not-allowed; }
   .btn-ghost { @apply btn text-muted hover:text-ink; }
   .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.2em] text-muted; }
   .hanzi { @apply font-hanzi font-medium; }
-  .numeral { font-family: 'Fraunces Display', 'Inter Variable', Georgia, serif; font-variation-settings: 'opsz' 144; font-variant-numeric: lining-nums; }
+  .numeral { font-variant-numeric: tabular-nums lining-nums; }
 }
 
 /* ───────── Motion ───────── */

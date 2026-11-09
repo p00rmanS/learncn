@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         sans: ['"Inter Variable"', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Microsoft YaHei"', '"PingFang SC"', 'sans-serif'],
-        display: ['"Fraunces Display"', '"Inter Variable"', '"Noto Serif SC"', 'Georgia', 'serif'],
+        display: ['"Inter Variable"', 'system-ui', 'sans-serif'],
         hanzi: ['"Noto Serif SC"', '"Source Han Serif SC"', '"Songti SC"', 'STSong', '"Noto Serif CJK SC"', 'SimSun', 'serif'],
       },
     },
