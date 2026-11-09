@@ -351,6 +351,11 @@ export const PART9_LESSONS: Lesson[] = [
             body: 'The time clause comes first and ends with 以前, 以后 or 的时候. The main action comes second: 吃饭以前, 我洗手. In English the order is the opposite, so practise saying the first part, pause, then the second.',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not drop 的 before 时候 after a verb phrase. Say 吃饭的时候 (when eating), not 吃饭时候.',
+          },
+          {
             type: 'taglish',
             body: 'Parang "bago kumain, naghuhugas ako ng kamay" at "pagkatapos kumain, nagsisipilyo ako". Ang 以前 ay "bago", ang 以后 ay "pagkatapos", at ang 的时候 ay "noong / kapag".',
           },
@@ -411,6 +416,11 @@ export const PART9_LESSONS: Lesson[] = [
           {
             type: 'pro',
             body: 'Both mean "or", but in different places. 还是 is for questions that force a choice (你要茶还是咖啡？). 或者 is for statements where several options are fine (茶或者咖啡都可以). Hear the difference: question versus statement.',
+          },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not use 还是 in a plain statement. In a sentence that is not a question, use 或者, as in 茶或者咖啡都可以.',
           },
           {
             type: 'remember',

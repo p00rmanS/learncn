@@ -285,6 +285,11 @@ export const PART4_LESSONS: Lesson[] = [
             body: '能 and 可以 overlap when asking permission, so both work in 我能坐这里吗 and 我可以坐这里吗. But 可以 sounds a little more polite, so use it with strangers.',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not use 会 for permission or ability in the moment. 会 is a skill you learned, and it can also mean "will". For "can I sit here" use 能 or 可以.',
+          },
+          {
             type: 'taglish',
             body: 'Sa Tagalog, "pwede" ay sumasaklaw sa lahat, pero sa Mandarin hinahati sa 会 (kaya dahil natutunan), 能 (kaya dahil may pagkakataon), 可以 (pwede, pinapayagan). Magandang tandaan: 会 = marunong.',
           },

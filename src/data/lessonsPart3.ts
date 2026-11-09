@@ -272,6 +272,11 @@ export const PART3_LESSONS: Lesson[] = [
             body: 'Do not translate 很 as "very" every time. In a plain statement like 我很好, 很 is just filling the slot, and it sounds odd to leave it out. Use 非常 (fēicháng) when you really mean "very".',
           },
           {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not use 是 in front of a plain adjective. 他是高 is wrong. Say 他很高 in a plain statement, or 他高 when you are comparing.',
+          },
+          {
             type: 'taglish',
             body: 'Hindi mo kailangan ng "ay": hindi 我是累 kundi 我很累. Isipin mo na parang "Ako ay napakapagod", pero ang "napaka" ay halos kasama na lang sa pattern.',
           },
@@ -391,6 +396,11 @@ export const PART3_LESSONS: Lesson[] = [
           {
             type: 'pro',
             body: 'For "where are you eating?", the place goes before the verb: 你在哪里吃饭？ Never at the end. Chinese puts place and time before the action, always.',
+          },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not use 在 to say you are or own something. 我在学生 is wrong, use 我是学生. 在 only marks a place or a moment in an action.',
           },
         ],
       },

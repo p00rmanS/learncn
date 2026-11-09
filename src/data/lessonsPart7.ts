@@ -58,6 +58,11 @@ export const PART7_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Always use 两 (liǎng) for "two" before a measure word: 两张票, 两只猫, 两瓶水. Say 一 + measure word to mean "a": 一只猫 is "a cat".',
           },
+          {
+            type: 'tip',
+            label: 'Common mistake',
+            body: 'Do not say 二 before a measure word in everyday speech. Say 两本书 (two books), not 二本书.',
+          },
         ],
       },
       {
