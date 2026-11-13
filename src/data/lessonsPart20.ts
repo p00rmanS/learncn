@@ -27,7 +27,7 @@ interface GrammarOpts {
 const LEVEL_NAME = { 1: 'Beginner', 2: 'Elementary', 3: 'Intermediate', 4: 'Advanced' } as const;
 
 /** Builds one grammar lesson in the same six-part shape: overview, deep dive, practice, remember, check, speak. */
-function grammar(o: GrammarOpts): Lesson {
+export function grammar(o: GrammarOpts): Lesson {
   const deep: Block[] = [
     { type: 'vocab', title: 'Words for this pattern', words: o.words },
     { type: 'table', head: o.formula.head, rows: o.formula.rows, caption: 'The pattern, step by step' },
