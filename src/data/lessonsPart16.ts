@@ -67,6 +67,7 @@ export const PART16_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'In Beijing and the north, people often say 礼拜 (lǐbài) instead of 星期, as in 礼拜天 (Sunday). Both are correct, so use whichever you hear more.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Sunday is 星期天 or 星期日. Do not say 星期七 in everyday speech.' },
         ],
       },
       {
@@ -160,6 +161,7 @@ export const PART16_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put 很 before the adjective to describe something: 很大 (big), 很冷 (cold). It is not always "very" in English. It is often just the normal way to state a quality.',
           },
+          { type: 'tip', label: 'Common mistake', body: '少 means few or less. Use 少, not 小, when you mean a small amount or number.' },
         ],
       },
       {
@@ -251,6 +253,7 @@ export const PART16_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Ask 有没有 (yǒu méi yǒu) to ask "do you have?" in a yes or no way: 你有没有橡皮？ (Do you have an eraser?). You can also use 吗 at the end: 你有橡皮吗？',
           },
+          { type: 'tip', label: 'Common mistake', body: '书 is a book and 书包 is a backpack. Do not say 书包 for book.' },
         ],
       },
       {
@@ -341,6 +344,7 @@ export const PART16_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put the place word last when describing where something is: 在 + place + 里 (inside), 上 (on), 旁边 (beside). For example 书在书包里 (the book is in the bag).',
           },
+          { type: 'tip', label: 'Common mistake', body: '房子 is the house and 房间 is a room. A house has many 房间.' },
         ],
       },
       {

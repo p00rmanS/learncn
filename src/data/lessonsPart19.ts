@@ -67,6 +67,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 用 (use) to say what you use: 我用牙膏刷牙 (I use toothpaste to brush my teeth). Put 用 + the item before the action.',
           },
+          { type: 'tip', label: 'Common mistake', body: '洗澡 means to take a bath or shower. Do not use 洗手 (wash hands) for bathing.' },
         ],
       },
       {
@@ -158,6 +159,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 会 (know how) with 弹 for a skill you have: 我会弹吉他 (I can play guitar). Use 一点 (a little) to be modest: 会一点 (I know a little).',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Use 弹 for piano or guitar, 吹 for wind instruments, and 打 for drums. Do not say 打钢琴.' },
         ],
       },
       {
@@ -249,6 +251,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 放 (put in) for adding seasoning: 放盐 (add salt), 放醋 (add vinegar). Use 不要 (do not want) to refuse: 我不要放醋 (I do not want vinegar).',
           },
+          { type: 'tip', label: 'Common mistake', body: '盐 is salt, 油 is oil, 醋 is vinegar, and 蒜 is garlic. 酒 means alcohol, so do not confuse it with 醋.' },
         ],
       },
       {
@@ -340,6 +343,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put 很 with a food and a taste to describe it: 豆浆很好喝 (soy milk is very nice to drink). 好喝 means nice to drink, and it works like 好吃 for food.',
           },
+          { type: 'tip', label: 'Common mistake', body: '豆腐 is tofu and 豆浆 is soy milk. Do not say 豆浆 for tofu.' },
         ],
       },
       {
@@ -431,6 +435,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 一碗 (a bowl of) with soup and porridge: 一碗鸡汤, 一碗粥. Use 喝 for soup and porridge, and 吃 for rice and noodles.',
           },
+          { type: 'tip', label: 'Common mistake', body: '汤 is soup and 粥 is porridge. Do not say 饭 for porridge.' },
         ],
       },
       {
@@ -522,6 +527,7 @@ export const PART19_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 也 (also) to say you want the same as someone: 我也想吃汉堡 (I also want to eat a burger). It is a short way to agree.',
           },
+          { type: 'tip', label: 'Common mistake', body: '面包 is bread and 汉堡 is a burger. Do not use 面包 for every Western food.' },
         ],
       },
       {
