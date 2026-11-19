@@ -68,6 +68,7 @@ export const PART17_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put 好 before a sense verb to say it is nice: 好吃 (tasty), 好闻 (smells good), 好听 (sounds nice), 好看 (pretty). It is the quickest way to give a compliment.',
           },
+          { type: 'tip', label: 'Common mistake', body: '闻 means to smell: 我闻到香味. Do not use 看 or 听 for smell.' },
         ],
       },
       {
@@ -159,6 +160,7 @@ export const PART17_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Count chopsticks as a pair: 一双筷子 (yì shuāng kuàizi). Use 双 for pairs of things, not 个, when you talk about chopsticks.',
           },
+          { type: 'tip', label: 'Common mistake', body: '锅 is a pot or pan, 碗 is a bowl, and 筷子 are chopsticks. Keep them apart.' },
         ],
       },
       {
@@ -250,6 +252,7 @@ export const PART17_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 小 (small) with 虫子 for something tiny and friendly: 小虫子 (little bug). Parents use it to make bugs sound less scary to children.',
           },
+          { type: 'tip', label: 'Common mistake', body: '虫 is the everyday word for bug. 昆虫 is the formal word for insect.' },
         ],
       },
       {

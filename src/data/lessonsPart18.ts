@@ -68,6 +68,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Say 不太 (bú tài) with a taste word to soften it: 不太辣 means "not very spicy". It is a polite way to warn someone before they eat.',
           },
+          { type: 'tip', label: 'Common mistake', body: '辣 means spicy, not temperature. 热 is hot in temperature, so do not say 热 for spicy food.' },
         ],
       },
       {
@@ -159,6 +160,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 一碗 (a bowl of) for rice and noodles: 一碗米饭, 一碗面条. Use 个 for buns and dumplings: 一个包子, 一个饺子.',
           },
+          { type: 'tip', label: 'Common mistake', body: '饺子 is a dumpling and 包子 is a steamed bun. They are not the same food.' },
         ],
       },
       {
@@ -250,6 +252,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Say 不吃 (bù chī) for "I do not eat": 我不吃猪肉 (I do not eat pork). Use 不 with 吃 and 喜欢 for food likes and dislikes.',
           },
+          { type: 'tip', label: 'Common mistake', body: '鸡蛋 is egg. 鸡肉 is chicken meat. 鸡 by itself is the bird. Do not use 鸡蛋 for chicken meat.' },
         ],
       },
       {
@@ -341,6 +344,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 要 (want) and 喝 (drink) together: 我要喝水 (I want to drink water). In a shop, you can drop 喝 and just say 我要一杯果汁.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Use 喝 for drinks and 吃 for food. Do not say 喝饭 for eating rice.' },
         ],
       },
       {
@@ -432,6 +436,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 一块 (a piece of) for cake, cookies and chocolate: 一块蛋糕, 一块巧克力. Use 一个 for a whole ice cream or a cookie.',
           },
+          { type: 'tip', label: 'Common mistake', body: '甜 is an adjective, so say 很甜, not 是甜. Use 糖 for sugar or candy.' },
         ],
       },
       {
@@ -523,6 +528,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put the time before the verb: 我七点起床 (I get up at seven), 我早上刷牙 (I brush my teeth in the morning). Time goes first, action second.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Use 刷牙 for brushing your teeth. 洗牙 means a dental cleaning.' },
         ],
       },
       {
@@ -614,6 +620,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Put the verb before the food: 炒菜 (stir-fry vegetables), 蒸包子 (steam buns), 煮面条 (boil noodles). You can also say 会 + verb to say you know how: 我会炒菜 (I can stir-fry).',
           },
+          { type: 'tip', label: 'Common mistake', body: '炒 is stir-fry, 煮 is boil, and 蒸 is steam. Do not use 煮 for frying.' },
         ],
       },
       {
@@ -705,6 +712,7 @@ export const PART18_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 玩 with a game or toy: 玩玩具 (play with toys), 玩球 (play ball). Add 吧 at the end to suggest: 我们唱歌吧 (let us sing).',
           },
+          { type: 'tip', label: 'Common mistake', body: '玩 means to play. 跑步 is the noun-verb for running as exercise. Do not say 玩跑 for running.' },
         ],
       },
       {

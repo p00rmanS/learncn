@@ -67,6 +67,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 很 with 疼 to say something hurts: 我的头很疼 (my head hurts). You do not need a new word for each part.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Do not put 是 before 疼. Say 我头很疼 or 我头疼, not 我是头疼.' },
         ],
       },
       {
@@ -158,6 +159,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Use 差 for "to" the hour (for example 差五分八点, five minutes to eight). Most people say it this way in daily speech.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Keep 点 in the hour: 三点 is three o’clock. Without 点, 三 is just the number three.' },
         ],
       },
       {
@@ -249,6 +251,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Add 边 to make a side: 左边 (left side), 右边 (right side), 旁边 (next to). Locals drop 边 in quick speech, so 左 alone also works.',
           },
+          { type: 'tip', label: 'Common mistake', body: '左 and 右 are left and right. 上 and 下 are up and down, or on and under. Do not swap them.' },
         ],
       },
       {
@@ -339,6 +342,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Fruit is sold by weight. Say 一斤 (half a kilo, one jīn) before the fruit: 一斤苹果 (a jīn of apples).',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Do not say 苹果 for every fruit. Use 个 for most fruit, as in 一个苹果 or 一个橘子.' },
         ],
       },
       {
@@ -430,6 +434,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Tomato is written 西红柿 but people also say 番茄 (fānqié) in some places. 西红柿 is the one you will hear most in daily life.',
           },
+          { type: 'tip', label: 'Common mistake', body: '菜 can mean a vegetable or a cooked dish. Context decides, so 一个菜 usually means one dish.' },
         ],
       },
       {
@@ -520,6 +525,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Chinese breakfast often includes something hot like congee (粥) or noodles. Do not be surprised if breakfast is not sweet.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Do not mix up 饭 (a meal, or cooked rice) and 饭店 (restaurant). 吃饭 means to eat a meal.' },
         ],
       },
       {
@@ -610,6 +616,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: '小 (xiǎo) makes it small: 小猫 (kitten), 小狗 (puppy). Adding 小 to an animal name is what locals do with young animals and pets.',
           },
+          { type: 'tip', label: 'Common mistake', body: 'Use 只 for most animals: 一只猫, 两只狗. Fish use 条, as in 一条鱼.' },
         ],
       },
       {
@@ -701,6 +708,7 @@ export const PART15_LESSONS: Lesson[] = [
             type: 'pro',
             body: 'Say 上数学课 (go to maths class) with 上 for attend. You say 上 with any class: 上课 is the general "to attend class".',
           },
+          { type: 'tip', label: 'Common mistake', body: '学校 is school and 教室 is classroom. Do not use them as if they meant the same thing.' },
         ],
       },
       {
